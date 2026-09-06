@@ -1,0 +1,14 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><title>Model B - Calculator</title><link rel="stylesheet" href="modelB.css"></head>
+<body>
+<div class="topnav"><a href="index.html">Model A - Finder</a><a href="modelB.html" class="active">Model B - Calculator</a><a href="modelC.html">Model C - Map</a></div>
+<div class="box"><h2>💰 Model B - Finance Calculator</h2><div id="fromA" class="fromA">Loading...</div>
+<label>Scheme (From Model A)</label><input id="schemeName" readonly>
+<label>Business Type</label><input id="bizType" readonly>
+<label>Loan Amount ₹</label><input id="loan" type="number">
+<label>Subsidy %</label><input id="sub" type="number">
+<label>Interest %/yr</label><input id="int" type="number" value="7">
+<label>Tenure Months</label><input id="ten" type="number" value="60">
+<button class="calcBtn" onclick="calcEMI()">Calculate EMI</button>
+<div id="result" class="result"></div>
+<button id="nextBtn" class="nextBtn" onclick="location.href='modelC.html'">Next → Model C Map</button>
+</div><script src="modelB.js"></script></body></html>

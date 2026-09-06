@@ -1,0 +1,11 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><title>Model C - Map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="modelC.css"></head>
+<body>
+<div class="topnav"><a href="index.html">Model A</a><a href="modelB.html">Model B</a><a href="modelC.html" class="active">Model C - Map</a></div>
+<div class="container"><div class="card"><h2>🗺️ Model C - Geo Router</h2><div id="infoBox" class="infoBox">Loading...</div>
+<div style="margin-top:10px"><select id="partner" onchange="changePartner()"><option value="bank">🏦 Canara Bank MSME - 1.2km</option><option value="dic">🏢 DIC Office - 2.5km</option><option value="supplier">📦 Supplier - 0.8km</option><option value="training">🎓 Training Center - 3.1km</option></select>
+<button class="b1" onclick="useMyLocation()">📍 My Location</button><button class="b2" onclick="findRoute()">🗺️ Find Route</button><button class="b3" onclick="openGMap()">Google Maps</button></div></div>
+<div class="card"><div id="map"></div></div>
+<div class="card route-card" id="routeCard"><h3 style="color:green;margin:0">✅ Route Found</h3><p id="routeInfo"></p></div>
+</div><script src="modelC.js"></script></body></html>

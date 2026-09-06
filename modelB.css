@@ -1,0 +1,11 @@
+body{font-family:Arial;margin:0;background:#f4f6f8}
+.topnav{display:flex;gap:8px;justify-content:center;padding:12px;background:#111;position:sticky;top:0}
+.topnav a{padding:10px 16px;background:#333;color:white;border-radius:8px;text-decoration:none;font-weight:bold;font-size:13px}
+.topnav a.active{background:#28a745}
+.box{max-width:540px;margin:20px auto;background:white;padding:22px;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+.fromA{background:#eafff0;border-left:4px solid green;padding:10px;border-radius:8px;margin-bottom:12px;font-size:13px}
+input{width:100%;padding:12px;margin:6px 0 12px 0;border-radius:8px;border:1px solid #ccc;box-sizing:border-box}
+.calcBtn{width:100%;padding:14px;background:#28a745;color:white;border:none;border-radius:10px;font-weight:bold;cursor:pointer}
+.result{display:none;background:#f0fff0;border:2px dashed #28a745;padding:12px;border-radius:10px;margin-top:12px}
+.nextBtn{display:none;width:100%;padding:12px;background:#7c3aed;color:white;border:none;border-radius:10px;margin-top:10px;font-weight:bold;cursor:pointer}
+label{font-weight:bold;font-size:13px}

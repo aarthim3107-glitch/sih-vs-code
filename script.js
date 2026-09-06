@@ -1,0 +1,30 @@
+const ALL_SCHEMES = [
+  { id:"pmmy_shishu_20_50", name:"PMMY Shishu (₹20k-₹50k)", ministry:"DFS", state:"All India", minAmount:20000, maxAmount:50000, bestFor:["tailor","mobile","food","vendor","shop","farming","all"], baseScore:94, reason:"No.1 micro loan for {biz} needing {amount} - no collateral, 1-day approval.", docs:"Aadhaar" },
+  { id:"pmmy_shishu_small", name:"PMMY Shishu Below 20k", ministry:"DFS", state:"All India", minAmount:1, maxAmount:19999, bestFor:["vendor","tailor","all"], baseScore:96, reason:"Best for very small {amount} for {biz}.", docs:"Aadhaar" },
+  { id:"pmmy_kishor", name:"PMMY Kishor", ministry:"DFS", state:"All India", minAmount:50001, maxAmount:500000, bestFor:["shop","manufacturing","all"], baseScore:92, reason:"For growing {biz} needing {amount} - equipment.", docs:"Business Plan" },
+  { id:"pmmy_tarun", name:"PMMY Tarun", ministry:"DFS", state:"All India", minAmount:500001, maxAmount:1000000, bestFor:["all"], baseScore:86, reason:"For established {biz} needing {amount} up to 10 lakh.", docs:"GST, ITR" },
+  { id:"pmegp", name:"PMEGP - 15-35% Subsidy", ministry:"Ministry of MSME", state:"All India", minAmount:50000, maxAmount:2500000, bestFor:["manufacturing","services","all"], baseScore:88, reason:"Subsidy 15-35% for new unit {biz} with {amount}.", docs:"Project Report" },
+  { id:"cgtmse", name:"CGTMSE - Collateral Free", ministry:"Ministry of MSME", state:"All India", minAmount:100000, maxAmount:50000000, bestFor:["all"], baseScore:85, reason:"No collateral for {amount} for {biz} - Govt guarantees up to 5 Cr.", docs:"Udyam" },
+  { id:"standup", name:"Stand-Up India", ministry:"DFS", state:"All India", minAmount:1000000, maxAmount:10000000, bestFor:["women","sc","st","all"], baseScore:91, reason:"₹10 lakh–₹1 crore for SC/ST & Women for {biz}.", docs:"Caste Certificate" },
+  { id:"vishwakarma", name:"PM Vishwakarma", ministry:"Ministry of MSME", state:"All India", minAmount:10000, maxAmount:300000, bestFor:["artisan","tailor","carpenter","all"], baseScore:93, reason:"For artisans {biz} - toolkit + loan up to 3 lakh for {amount}.", docs:"Artisan ID" },
+  { id:"kcc", name:"KCC Allied", ministry:"Ministry of Agriculture", state:"All India", minAmount:10000, maxAmount:300000, bestFor:["agriculture","farmer","dairy","all"], baseScore:87, reason:"Easy 4% credit for {biz} with {amount}.", docs:"Land Record" },
+  { id:"svep", name:"SVEP - Village Entrepreneurship", ministry:"MoRD", state:"All India", minAmount:10000, maxAmount:200000, bestFor:["rural","village","all"], baseScore:84, reason:"For rural non-farm {biz} via SHG with {amount}.", docs:"SHG ID" },
+  { id:"zed", name:"MSME ZED Certification", ministry:"Ministry of MSME", state:"All India", minAmount:50000, maxAmount:5000000, bestFor:["manufacturing","export","domestic manufacturer","all"], baseScore:89, reason:"Best For Domestic Manufacturers aiming to export - Zero Defect Zero Effect for {biz} with {amount}.", docs:"Udyam, GST" },
+  { id:"pm_svanidhi", name:"PM SVANidhi - Street Vendors", ministry:"MoHUA", state:"All India", minAmount:10000, maxAmount:50000, bestFor:["vendor","street vendor","food","all"], baseScore:95, reason:"Collateral-free loan up to ₹50k for street vendors {biz} with {amount}.", docs:"Vendor ID" },
+  { id:"sisfs", name:"Startup India Seed Fund", ministry:"DPIIT", state:"All India", minAmount:500000, maxAmount:5000000, bestFor:["startup","technology","all"], baseScore:90, reason:"Seed funding up to 50 lakh for startups {biz}.", docs:"DPIIT" },
+  { id:"women", name:"Mahila Udyam Nidhi", ministry:"SIDBI", state:"All India", minAmount:10000, maxAmount:1000000, bestFor:["women","tailor","food","all"], baseScore:92, reason:"Special loan for women {biz} with {amount}.", docs:"Aadhaar" }
+];
+function analyzeStory(){
+  const text=document.getElementById('userInput').value.trim(); if(!text){alert("Type your situation!");return;}
+  const lower=text.toLowerCase(); let need=0, amount="Not found";
+  let m2=text.match(/(\d+(\.\d+)?)\s*lakh/i); if(m2){need=parseFloat(m2[1])*100000; amount="₹"+m2[0];} else{let all=[...text.matchAll(/₹?\s*(\d{1,3},?\d{3,5})/g)]; if(all.length){let v=parseInt(all[all.length-1][0].replace(/,/g,'')); if(v>1000){need=v; amount="₹"+v.toLocaleString('en-IN');}}}
+  let biz="Small Business", bizKey="all";
+  if(lower.includes("mobile")){biz="Mobile repair shop";bizKey="mobile";} else if(lower.includes("tailor")){biz="Tailoring business";bizKey="tailor";} else if(lower.includes("food")||lower.includes("vendor")){biz="Food vending";bizKey="food";} else if(lower.includes("manufacturing")||lower.includes("export")||lower.includes("domestic manufacturer")){biz="Manufacturing unit";bizKey="manufacturing";} else if(lower.includes("shop")){biz="Small Shop";bizKey="shop";}
+  let scored=ALL_SCHEMES.map(s=>{let score=s.minAmount<=need&&need<=s.maxAmount?s.baseScore:s.baseScore-30; if(s.bestFor.includes(bizKey)||s.bestFor.includes("all"))score+=5; if((lower.includes("export")||lower.includes("domestic manufacturer"))&&s.id==="zed")score+=15; if(lower.includes("vendor")&&s.id==="pm_svanidhi")score+=12; if(score>98)score=98; return{...s,score,reason:s.reason.replace("{amount}",amount).replace("{biz}",biz)};});
+  scored.sort((a,b)=>b.score-a.score); let top3=scored.slice(0,3);
+  localStorage.setItem("selectedScheme",top3[0].name); localStorage.setItem("subsidy",top3[0].name.includes("PMEGP")?"35%":"15%"); localStorage.setItem("loanAmount",need||50000); localStorage.setItem("businessType",biz);
+  let html=`<div style="margin-top:15px"><h3>✅ Extracted: ${biz} | ${amount}</h3>`;
+  top3.forEach(s=>{html+=`<div class="scheme" style="background:${s.score>=90?'#eafff0':'#eaf0ff'};border-left:4px solid ${s.score>=90?'green':'#3b82f6'}"><b>${s.name} - ${s.score}% Match</b><br><small>${s.ministry}</small><br>${s.reason}<br><small>📄 ${s.docs}</small></div>`;});
+  html+=`<button onclick="location.href='modelB.html'" style="background:#28a745">Go to Model B → Calculator</button> <button onclick="location.href='modelC.html'" style="background:#7c3aed">Go to Model C → Map</button></div>`;
+  document.getElementById('resultBox').innerHTML=html;
+}
