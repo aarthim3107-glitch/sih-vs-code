@@ -1,14 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><title>Model A - Scheme Finder</title><link rel="stylesheet" href="style.css"></head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIH Project - 3 Models Platform</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+body{background:#ffffff;color:#0f172a}
+header{padding:16px 5%;display:flex;justify-content:space-between;align-items:center;background:white;box-shadow:0 2px 12px rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+.logo{font-weight:900;font-size:22px;color:#1e2a5a}
+.logo span{font-size:11px;background:#eef2ff;color:#4f46e5;padding:4px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+.hero{text-align:center;padding:45px 5% 10px}
+.hero h1{font-size:32px;font-weight:800}
+.hero p{color:#64748b;margin-top:10px;max-width:700px;margin-left:auto;margin-right:auto}
+
+/* 3 BIG CIRCLES - NAME INSIDE CIRCLE */
+.circles-container{display:flex;justify-content:center;gap:50px;flex-wrap:wrap;padding:50px 5% 30px}
+.model-card{width:300px;text-align:center;cursor:pointer;transition:0.3s}
+.model-card:hover{transform:translateY(-12px)}
+.circle{width:290px;height:290px;border-radius:50%;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;box-shadow:0 25px 50px rgba(0,0,0,0.18);padding:20px;text-align:center;position:relative}
+.circle.icon{font-size:65px;margin-bottom:12px;filter:drop-shadow(0 2px 5px rgba(0,0,0,0.2))}
+.circle.title{font-size:17px;font-weight:800;line-height:1.2;text-shadow:0 1px 3px rgba(0,0,0,0.2)}
+.circle.sub{font-size:11px;margin-top:6px;opacity:0.9;font-weight:500}
+.c1{background:linear-gradient(135deg,#3b82f6 0%, #4f46e5 100%)}
+.c2{background:linear-gradient(135deg,#14b8a6 0%, #0e7490 100%)}
+.c3{background:linear-gradient(135deg,#8b5cf6 0%, #f97316 100%)}
+.model-card.active.circle{ring:5px solid #000; outline:4px solid #4f46e5; outline-offset:6px}
+
+/* MODEL BOXES */
+.model-section{display:none;max-width:850px;margin:30px auto;background:#f8faff;padding:28px;border-radius:18px;box-shadow:0 10px 40px rgba(0,0,0,0.08);border:1px solid #e2e8f0}
+.model-section.active{display:block;animation:fade 0.4s}
+@keyframes fade{from{opacity:0;transform:translateY(15px)} to{opacity:1;transform:translateY(0)}}
+.model-section h2{font-size:22px;margin-bottom:6px}
+.model-section p.small{color:#64748b;font-size:13px;margin-bottom:16px}
+textarea,input,select{width:100%;padding:13px;border-radius:10px;border:1.5px solid #cbd5e1;margin:8px 0;font-size:14px;box-sizing:border-box}
+button.mainBtn{padding:13px 24px;border:none;border-radius:10px;color:white;font-weight:700;cursor:pointer;margin-top:10px;width:100%}
+.blueBtn{background:#4f46e5}.greenBtn{background:#0e7490}.purpleBtn{background:#7c3aed}
+.resultBox{margin-top:16px;padding:14px;border-radius:12px;background:white;border:1px dashed #94a3b8}
+.scheme{padding:12px;margin:10px 0;border-radius:10px;background:white;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-left:5px solid #4f46e5}
+#map{height:420px;width:100%;border-radius:14px;border:2px solid #ddd;margin-top:12px}
+.tag{font-size:11px;background:#e0e7ff;color:#4338ca;padding:3px 8px;border-radius:20px;font-weight:700}
+</style>
+</head>
 <body>
-<div class="topnav"><a href="index.html" class="active">Model A - Finder</a><a href="modelB.html">Model B - Calculator</a><a href="modelC.html">Model C - Map</a></div>
-<div class="container">
-<h1>🤖 Model A - AI Scheme Finder</h1>
-<p>14 Pan-India Central Schemes - Works in All 28 States</p>
-<textarea id="userInput" placeholder="Example: I am domestic manufacturer aiming to export products need 3 lakh OR My mother is street vendor earning 12000 need 30000 for tailoring"></textarea>
-<button onclick="analyzeStory()">Analyze My Story</button>
-<div id="resultBox"></div>
+
+<header>
+  <div class="logo">SIH PROJECT <span>Smart India Hackathon 2025</span></div>
+  <div style="font-size:13px;color:#64748b;">One Platform • Three Models</div>
+</header>
+
+<div class="hero">
+  <h1>One Platform • Three Models • Impact at Scale</h1>
+  <p>Click on any circle below to run the model - All 3 models in single page</p>
 </div>
-<script src="script.js"></script>
-</body></html>
+
+<!-- 3 CIRCLES WITH NAME INSIDE -->
+<div class="circles-container">
+  <div class="model-card" id="cardA" onclick="openModel('A')">
+    <div class="circle c1">
+      <div class="icon">🤖</div>
+      <div class="title">Smart Scheme<br>Recommender</div>
+      <div class="sub">14 Schemes • All States</div>
+    </div>
+  </div>
+
+  <div class="model-card" id="cardB" onclick="openModel('B')">
+    <div class="circle c2">
+      <div class="icon">🧮</div>
+      <div class="title">Financial<br>Calculator</div>
+      <div class="sub">Loan • Subsidy • EMI</div>
+    </div>
+  </div>
+
+  <div class="model-card" id="cardC" onclick="openModel('C')">
+    <div class="circle c3">
+      <div class="icon">🗺️</div>
+      <div class="title">Geo Spatial Partner<br>Locator & Router</div>
+      <div class="sub">Map • Route • Partners</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODEL A - Smart Scheme Recommender -->
+<div id="modelA" class="model-section">
+  <h2>🤖 Model A - Smart Scheme Recommender</h2>
+  <p class="small">14 Pan-India Central Schemes - Tell your story in any language</p>
+  <textarea id="userInput" placeholder="Example: I am domestic manufacturer aiming to export product need 3 lakh OR My mother is street vendor earning 12000 need 30000 for tailoring"></textarea>
+  <button class="mainBtn blueBtn" onclick="analyzeStory()">Analyze My Story →</button>
+  <div id="resultA" class="resultBox" style="display:none"></div>
+</div>
+
+<!-- MODEL B - Financial Calculator -->
+<div id="modelB" class="model-section">
+  <h2>🧮 Model B - Financial Calculator</h2>
+  <p class="small">Connected to Model A - Auto fills data</p>
+  <div id="fromAInfo" style="background:#eafff0;padding:10px;border-radius:8px;font-size:13px;border-left:4px solid green;margin-bottom:12px">First run Model A to auto-fill</div>
+  <label style="font-weight:700;font-size:13px">Scheme Name</label><input id="schemeName" readonly>
+  <label style="font-weight:700;font-size:13px">Loan Amount ₹</label><input id="loanAmt" type="number">
+  <label style="font-weight:700;font-size:13px">Subsidy %</label><input id="subPct" type="number">
+  <label style="font-weight:700;font-size:13px">Interest % per year</label><input id="intPct" type="number" value="7">
+  <label style="font-weight:700;font-size:13px">Tenure Months</label><input id="tenure" type="number" value="60">
+  <button class="mainBtn greenBtn" onclick="calcEMI()">Calculate EMI</button>
+  <div id="resultB" class="resultBox" style="display:none"></div>
+</div>
+
+<!-- MODEL C - Geo Spatial -->
+<div id="modelC" class="model-section">
+  <h2>🗺️ Model C - Geo Spatial Partner Locator & Router</h2>
+  <p class="small">Find nearest partner for your business</p>
+  <div id="infoC" style="background:#f3e8ff;padding:10px;border-radius:8px;font-size:13px;border-left:4px solid #7c3aed;margin-bottom:12px">Loads data from Model A & B</div>
+  <select id="partnerSel" onchange="changePartner()"><option value="bank">🏦 Canara Bank MSME - 1.2km</option><option value="dic">🏢 DIC Office - 2.5km</option><option value="supplier">📦 Supplier Hub - 0.8km</option><option value="training">🎓 Training Center - 3.1km</option></select>
+  <div style="display:flex;gap:8px;margin-top:10px"><button class="mainBtn blueBtn" style="flex:1" onclick="useMyLocation()">📍 My Location</button><button class="mainBtn greenBtn" style="flex:1" onclick="findRoute()">🗺️ Find Route</button><button class="mainBtn purpleBtn" style="flex:1" onclick="openGMap()">Google Maps</button></div>
+  <div id="map"></div>
+  <div id="routeCard" class="resultBox" style="display:none;background:#f0fff0;border:2px solid #28a745"></div>
+</div>
+
+<script>
+// ===== MODEL A LOGIC - 14 SCHEMES =====
+const ALL_SCHEMES = [
+  { id:"pmmy_shishu_20_50", name:"PMMY Shishu (₹20k-₹50k)", ministry:"DFS", min:20000, max:50000, keys:["tailor","vendor","all"], score:94, reason:"No.1 micro loan for {biz} needing {amount} - no collateral, 1-day approval." },
+  { id:"pmmy_shishu_small", name:"PMMY Shishu Below 20k", ministry:"DFS", min:1, max:19999, keys:["vendor","all"], score:96, reason:"Best for very small {amount} for {biz}." },
+  { id:"pmmy_kishor", name:"PMMY Kishor", ministry:"DFS", min:50001, max:500000, keys:["shop","manufacturing","all"], score:92, reason:"For growing {biz} needing {amount} - equipment purchase." },
+  { id:"pmmy_tarun", name:"PMMY Tarun (Up to 10L)", ministry:"DFS", min:500001, max:1000000, keys:["all"], score:86, reason:"For established {biz} needing {amount}." },
+  { id:"pmegp", name:"PMEGP - 15-35% Subsidy", ministry:"MSME", min:50000, max:2500000, keys:["manufacturing","all"], score:88, reason:"Subsidy 15-35% for new unit {biz} with {amount}." },
+  { id:"cgtmse", name:"CGTMSE - Collateral Free", ministry:"MSME", min:100000, max:50000000, keys:["all"], score:85, reason:"No collateral for {amount} for {biz} - Govt guarantees up to 5 Cr." },
+  { id:"standup", name:"Stand-Up India", ministry:"DFS", min:1000000, max:10000000, keys:["women","all"], score:91, reason:"₹10L-₹1Cr for SC/ST & Women for {biz}." },
+  { id:"vishwakarma", name:"PM Vishwakarma", ministry:"MSME", min:10000, max:300000, keys:["artisan","tailor","all"], score:93, reason:"For artisans {biz} - toolkit + loan up to 3L for {amount}." },
+  { id:"pm_svanidhi", name:"PM SVANidhi - Street Vendors", ministry:"MoHUA", min:10000, max:50000, keys:["vendor","all"], score:95, reason:"Collateral-free ₹50k for street vendors {biz} with {amount}." },
+  { id:"zed", name:"MSME ZED Certification", ministry:"MSME", min:50000, max:5000000, keys:["manufacturing","export","all"], score:89, reason:"Best For Domestic Manufacturers aiming to export - Zero Defect Zero Effect for {biz} with {amount}." },
+  { id:"kcc", name:"KCC Allied", ministry:"Agriculture", min:10000, max:300000, keys:["farmer","all"], score:87, reason:"Easy 4% credit for {biz} with {amount}." },
+  { id:"sisfs", name:"Startup India Seed Fund", ministry:"DPIIT", min:500000, max:5000000, keys:["startup","all"], score:90, reason:"Seed funding up to 50L for startups {biz}." },
+  { id:"mahila", name:"Mahila Udyam Nidhi", ministry:"SIDBI", min:10000, max:1000000, keys:["women","tailor","all"], score:92, reason:"Special loan for women {biz} with {amount}." },
+  { id:"svep", name:"SVEP - Village Entrepreneurship", ministry:"MoRD", min:10000, max:200000, keys:["rural","all"], score:84, reason:"For rural non-farm {biz} via SHG with {amount}." }
+];
+
+function openModel(type){
+  document.querySelectorAll('.model-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.model-card').forEach(c=>c.classList.remove('active'));
+  if(type==='A'){document.getElementById('modelA').classList.add('active');document.getElementById('cardA').classList.add('active');}
+  if(type==='B'){document.getElementById('modelB').classList.add('active');document.getElementById('cardB').classList.add('active');loadBData(); setTimeout(()=>map.invalidateSize(),300);}
+  if(type==='C'){document.getElementById('modelC').classList.add('active');document.getElementById('cardC').classList.add('active');loadCData(); setTimeout(()=>map.invalidateSize(),300);}
+  window.scrollTo({top:500,behavior:'smooth'});
+}
+
+function analyzeStory(){
+  const text=document.getElementById('userInput').value.trim(); if(!text){alert("Please type your story");return;}
+  const lower=text.toLowerCase(); let need=0, amtStr="Not found";
+  let m2=text.match(/(\d+(\.\d+)?)\s*lakh/i); if(m2){need=parseFloat(m2[1])*100000; amtStr="₹"+m2[0];}
+  else{let all=[...text.matchAll(/₹?\s*(\d{1,3},?\d{3,5})/g)]; if(all.length){let v=parseInt(all[all.length-1][0].replace(/,/g,'')); if(v>1000){need=v; amtStr="₹"+v.toLocaleString('en-IN');}}}
+  if(need===0)need=30000;
+  let biz="Small Business", key="all";
+  if(lower.includes("mobile")){biz="Mobile repair shop";key="all";} else if(lower.includes("tailor")){biz="Tailoring business";key="tailor";} else if(lower.includes("vendor")||lower.includes("street")){biz="Street vending";key="vendor";} else if(lower.includes("manufactur")||lower.includes("export")){biz="Manufacturing unit";key="manufacturing";} else if(lower.includes("shop")){biz="Small Shop";key="shop";}
+  let scored=ALL_SCHEMES.map(s=>{let sc=s.min<=need&&need<=s.max?s.score:s.score-30; if(s.keys.includes(key)||s.keys.includes("all"))sc+=5; if(lower.includes("export")&&s.id==="zed")sc+=15; if(lower.includes("vendor")&&s.id==="pm_svanidhi")sc+=12; if(sc>98)sc=98; return{...s,final:sc,reason:s.reason.replace("{amount}",amtStr).replace("{biz}",biz)};});
+  scored.sort((a,b)=>b.final-a.final); let top3=scored.slice(0,3);
+  localStorage.setItem("selectedScheme",top3[0].name); localStorage.setItem("subsidy",top3[0].name.includes("PMEGP")?"35":"15"); localStorage.setItem("loanAmount",need); localStorage.setItem("businessType",biz);
+  let html=`<div style="margin-bottom:10px"><span class="tag">Extracted</span> <b>${biz}</b> | ${amtStr}</div>`;
+  top3.forEach(s=>{html+=`<div class="scheme"><b>${s.name} - ${s.final}% Match</b><br><small>${s.ministry} • All India</small><br>${s.reason}</div>`;});
+  html+=`<button class="mainBtn greenBtn" onclick="openModel('B')">Next → Go to Financial Calculator</button>`;
+  document.getElementById('resultA').style.display='block'; document.getElementById('resultA').innerHTML=html;
+}
+
+// ===== MODEL B =====
+function loadBData(){
+  let s=localStorage.getItem("selectedScheme")||"Please run Model A first";
+  let l=localStorage.getItem("loanAmount")||"50000"; let sub=localStorage.getItem("subsidy")||"15"; let b=localStorage.getItem("businessType")||"";
+  document.getElementById('schemeName').value=s; document.getElementById('loanAmt').value=l; document.getElementById('subPct').value=sub;
+  document.getElementById('fromAInfo').innerHTML=`✅ From Model A: <b>${s}</b> | Business: ${b} | Amount: ₹${parseInt(l).toLocaleString('en-IN')}`;
+}
+function calcEMI(){
+  let L=parseFloat(document.getElementById('loanAmt').value); let s=parseFloat(document.getElementById('subPct').value);
+  let r=parseFloat(document.getElementById('intPct').value)/12/100; let n=parseFloat(document.getElementById('tenure').value);
+  let subAmt=L*s/100; let pay=L-subAmt; let emi=(pay*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+  localStorage.setItem("calculatedEMI",emi.toFixed(0)); localStorage.setItem("payableAmount",pay);
+  document.getElementById('resultB').style.display='block';
+  document.getElementById('resultB').innerHTML=`<b style="color:green">Subsidy: ₹${subAmt.toLocaleString('en-IN')}</b><br>Pay Only: ₹${pay.toLocaleString('en-IN')}<br><b>EMI: ₹${emi.toFixed(0)}/month for ${n} months</b><br><br><button class="mainBtn purpleBtn" onclick="openModel('C')">Next → Go to Map</button>`;
+}
+
+// ===== MODEL C =====
+var map=L.map('map').setView([8.7139,77.7567],13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(map);
+var userMarker=L.marker([8.7139,77.7567]).addTo(map).bindPopup("You").openPopup();
+var partnerMarker=L.marker([8.7239,77.7667]).addTo(map).bindPopup("Bank");
+var routeLine=null; const pts={bank:[8.7239,77.7667],dic:[8.7339,77.7467],supplier:[8.7039,77.7667],training:[8.7139,77.7867]};
+function loadCData(){
+  let s=localStorage.getItem("selectedScheme")||"Scheme"; let l=localStorage.getItem("loanAmount")||"50000"; let b=localStorage.getItem("businessType")||"Business"; let emi=localStorage.getItem("calculatedEMI")||"--";
+  document.getElementById('infoC').innerHTML=`✅ From A & B: <b>${s}</b> | ${b} | Loan ₹${parseInt(l).toLocaleString('en-IN')} | EMI ₹${emi}`;
+  setTimeout(()=>map.invalidateSize(),400);
+}
+function changePartner(){let v=document.getElementById('partnerSel').value; let c=pts[v]; if(partnerMarker)map.removeLayer(partnerMarker); partnerMarker=L.marker(c).addTo(map).bindPopup(v).openPopup(); if(routeLine)map.removeLayer(routeLine); document.getElementById('routeCard').style.display='none';}
+function useMyLocation(){navigator.geolocation.getCurrentPosition(p=>{let lat=p.coords.latitude,lon=p.coords.longitude; map.setView([lat,lon],14); if(userMarker)map.removeLayer(userMarker); userMarker=L.marker([lat,lon]).addTo(map).bindPopup("You here").openPopup();});}
+function findRoute(){let u=userMarker.getLatLng(),p=partnerMarker.getLatLng(); if(routeLine)map.removeLayer(routeLine); routeLine=L.polyline([u,p],{color:'blue',weight:6}).addTo(map); map.fitBounds([u,p],{padding:[60,60]}); let d=map.distance(u,p); document.getElementById('routeCard').style.display='block'; document.getElementById('routeCard').innerHTML=`✅ Route Found<br>Distance: <b>${(d/1000).toFixed(1)} km</b> | Time: <b>${Math.round(d/400)} mins</b> | Auto: ₹${Math.round(d/30)}`; }
+function openGMap(){let p=partnerMarker.getLatLng(),u=userMarker.getLatLng(); window.open(`https://www.google.com/maps/dir/${u.lat},${u.lng}/${p.lat},${p.lng}/`,'_blank');}
+</script>
+</body>
+</html>
