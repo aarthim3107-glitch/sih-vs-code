@@ -19,13 +19,10 @@ header{padding:14px 5%;display:flex;justify-content:space-between;align-items:ce
 .model-card{width:240px;text-align:center;cursor:pointer;transition:0.3s}
 .model-card:hover{transform:translateY(-10px)}
 .circle{width:220px;height:220px;border-radius:50%;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;box-shadow:0 18px 35px rgba(0,0,0,0.18);padding:15px;text-align:center}
-.circle.icon{font-size:48px;margin-bottom:6px}
-.circle.title{font-size:14px;font-weight:800;line-height:1.2}
-.circle.sub{font-size:10px;margin-top:5px;opacity:0.95;background:rgba(0,0,0,0.18);padding:3px 8px;border-radius:20px;font-weight:700}
 .c1{background:linear-gradient(135deg,#3b82f6,#4f46e5)}.c2{background:linear-gradient(135deg,#14b8a6,#0e7490)}.c3{background:linear-gradient(135deg,#8b5cf6,#f97316)}
 .model-section{display:none;max-width:860px;margin:25px auto;background:#f8faff;padding:22px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.07);border:1px solid #e2e8f0}
-.model-section.active{display:block;animation:fade 0.3s} @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-input,select,textarea{width:100%;padding:12px;border-radius:10px;border:1.5px solid #cbd5e1;margin:6px 0;font-size:13px}
+.model-section.active{display:block}
+input,select{width:100%;padding:12px;border-radius:10px;border:1.5px solid #cbd5e1;margin:6px 0;font-size:13px}
 button.mainBtn{padding:12px 20px;border:none;border-radius:10px;color:white;font-weight:700;cursor:pointer;margin-top:10px;width:100%}
 .blueBtn{background:#4f46e5}.greenBtn{background:#0e7490}.purpleBtn{background:#7c3aed}
 .resultBox{margin-top:14px;padding:12px;border-radius:12px;background:white;border:1px dashed #94a3b8}
@@ -37,10 +34,7 @@ button.mainBtn{padding:12px 20px;border:none;border-radius:10px;color:white;font
 </style>
 </head>
 <body>
-<header>
-<div class="logo">PS 26092 <span>MoSJE • SC Finance Router</span></div>
-<div style="font-size:11px;color:#64748b;">EN | हिंदी | தமிழ்</div>
-</header>
+<header><div class="logo">PS 26092 <span>MoSJE • SC Finance Router</span></div><div style="font-size:11px">EN | हिंदी | தமிழ்</div></header>
 <div class="hero">
 <h1>AI-Driven Scheme Matching for SC Entrepreneurs</h1>
 <p>Matching + Routing Engine - Solves Wrong Scheme & Wrong Partner - As per PS 26092</p>
@@ -50,74 +44,54 @@ button.mainBtn{padding:12px 20px;border:none;border-radius:10px;color:white;font
 </div>
 <p id="modeInfo" style="margin-top:10px;font-size:11px;background:#eef2ff;padding:6px 12px;border-radius:20px;display:inline-block;color:#4f46e5;font-weight:700">SC MODE: 5 SC Schemes | Income ≤5L | NPA-Aware Routing</p>
 </div>
-
 <div class="circles-container">
-<div class="model-card" onclick="openModel('A')"><div class="circle c1"><div class="icon">🤖</div><div class="title">Smart Scheme<br>Recommender</div><div id="circleA_sub" class="sub">5 SC Schemes • ≤5L</div></div></div>
-<div class="model-card" onclick="openModel('B')"><div class="circle c2"><div class="icon">🧮</div><div class="title">Financial<br>Calculator</div><div class="sub">90% • 6.5-8% • Moratorium</div></div></div>
-<div class="model-card" onclick="openModel('C')"><div class="circle c3"><div class="icon">🗺️</div><div class="title">Geo Partner<br>Locator & Router</div><div class="sub">NPA Filter • Fund Check</div></div></div>
+<div class="model-card" onclick="openModel('A')"><div class="circle c1"><div style="font-size:48px">🤖</div><div style="font-size:14px;font-weight:800">Smart Scheme<br>Recommender</div><div id="circleA_sub" style="font-size:10px;margin-top:5px;background:rgba(0,0,0,0.2);padding:3px 8px;border-radius:20px">5 SC Schemes • ≤5L</div></div></div>
+<div class="model-card" onclick="openModel('B')"><div class="circle c2"><div style="font-size:48px">🧮</div><div style="font-size:14px;font-weight:800">Financial<br>Calculator</div><div style="font-size:10px;margin-top:5px;background:rgba(0,0,0,0.2);padding:3px 8px;border-radius:20px">90% • 6.5-8% • Moratorium</div></div></div>
+<div class="model-card" onclick="openModel('C')"><div class="circle c3"><div style="font-size:48px">🗺️</div><div style="font-size:14px;font-weight:800">Geo Partner<br>Locator & Router</div><div style="font-size:10px;margin-top:5px;background:rgba(0,0,0,0.2);padding:3px 8px;border-radius:20px">NPA Filter • Fund Check</div></div></div>
 </div>
-
 <div id="modelA" class="model-section">
-<h2>🤖 Model A - Smart Scheme Recommender - PS 26092</h2>
-<p style="font-size:12px;color:#64748b;margin:6px 0">As per PS: Income, Project Type, Cost, Education Status</p>
-<label style="font-weight:700;font-size:12px">Annual Family Income (Max ₹5L for SC) ₹</label><input id="income" type="number" placeholder="Ex: 300000">
-<label style="font-weight:700;font-size:12px">Project Type</label>
-<select id="projectType"><option value="micro">Small - Cart / Tailor / Vendor / Street (≤1.4L)</option><option value="term">Medium/Large - Manufacturing / Shop / Business (≤50L)</option><option value="education">Education / Tuition Fees</option></select>
+<h2>🤖 Model A - Smart Scheme Recommender</h2>
+<p style="font-size:12px;color:#64748b">As per PS: Income, Project Type, Cost, Education Status</p>
+<label style="font-weight:700;font-size:12px">Annual Family Income (Max ₹5L) ₹</label><input id="income" type="number" placeholder="Ex: 300000">
+<label style="font-weight:700;font-size:12px">Project Type</label><select id="projectType"><option value="micro">Small - Cart / Tailor / Vendor (≤1.4L)</option><option value="term">Medium - Manufacturing / Shop (≤50L)</option><option value="education">Education / Tuition Fees</option></select>
 <label style="font-weight:700;font-size:12px">Estimated Cost ₹</label><input id="cost" type="number" placeholder="Ex: 80000">
 <label style="font-weight:700;font-size:12px">SC Caste Certificate</label><select id="caste"><option value="yes">Yes - SC Certificate Available</option><option value="no">No</option></select>
 <div style="display:flex;gap:6px"><button class="mainBtn blueBtn" style="flex:1" onclick="analyzeStory()">Analyze & Recommend →</button><button onclick="startVoice()" style="flex:0.4;padding:12px;border-radius:10px;border:1px solid #4f46e5;background:white;color:#4f46e5;font-weight:700;cursor:pointer;margin-top:10px">🎤 Speak</button></div>
 <div id="resultA" class="resultBox" style="display:none"></div>
 </div>
-
 <div id="modelB" class="model-section">
-<h2>🧮 Model B - Financial Calculator - 90% Coverage, 6.5-8%, Moratorium 3-12 Months</h2>
+<h2>🧮 Model B - Financial Calculator</h2>
 <div id="fromAInfo" style="background:#eafff0;padding:8px;border-radius:8px;font-size:12px;border-left:4px solid green;margin-bottom:10px">Run Model A first</div>
 <label style="font-weight:700;font-size:12px">Scheme</label><input id="schemeName" readonly>
-<div style="display:flex;gap:8px"><div style="flex:1"><label style="font-weight:700;font-size:12px">Loan Amount (90% of cost) ₹</label><input id="loanAmt" type="number"></div><div style="flex:1"><label style="font-weight:700;font-size:12px">Subsidy/Margin %</label><input id="subPct" type="number" value="10"></div></div>
-<div style="display:flex;gap:8px"><div style="flex:1"><label style="font-weight:700;font-size:12px">Interest % (6.5-8% SC)</label><input id="intPct" type="number" value="6.5"></div><div style="flex:1"><label style="font-weight:700;font-size:12px">Moratorium Months (3-12)</label><input id="mora" type="number" value="6"></div><div style="flex:1"><label style="font-weight:700;font-size:12px">Tenure Months</label><input id="tenure" type="number" value="60"></div></div>
+<div style="display:flex;gap:8px"><div style="flex:1"><label style="font-size:12px">Loan Amount (90%) ₹</label><input id="loanAmt" type="number"></div><div style="flex:1"><label style="font-size:12px">Subsidy %</label><input id="subPct" type="number" value="10"></div></div>
+<div style="display:flex;gap:8px"><div style="flex:1"><label style="font-size:12px">Interest % (6.5-8%)</label><input id="intPct" type="number" value="6.5"></div><div style="flex:1"><label style="font-size:12px">Moratorium Months</label><input id="mora" type="number" value="6"></div><div style="flex:1"><label style="font-size:12px">Tenure</label><input id="tenure" type="number" value="60"></div></div>
 <button class="mainBtn greenBtn" onclick="calcEMI()">Calculate EMI with Moratorium</button>
 <div id="resultB" class="resultBox" style="display:none"></div>
 </div>
-
 <div id="modelC" class="model-section">
-<h2>🗺️ Model C - Geo Partner Locator & Router - NPA & Fund Filter</h2>
+<h2>🗺️ Model C - Geo Partner Locator & Router</h2>
 <div id="infoC" style="background:#f3e8ff;padding:8px;border-radius:8px;font-size:12px;border-left:4px solid #7c3aed;margin-bottom:10px">Loads from Model A & B</div>
 <select id="partnerSel" onchange="changePartner()"></select>
 <div style="display:flex;gap:6px;margin-top:8px"><button class="mainBtn blueBtn" style="flex:1" onclick="useMyLocation()">📍 My Location</button><button class="mainBtn greenBtn" style="flex:1" onclick="findRoute()">🗺️ Route</button><button class="mainBtn purpleBtn" style="flex:1" onclick="openGMap()">Google Maps</button></div>
-<div id="map"></div>
-<div id="partnerList"></div>
+<div id="map"></div><div id="partnerList"></div>
 <div id="routeCard" class="resultBox" style="display:none;background:#f0fff0;border:2px solid #28a745"></div>
 </div>
-
 <script>
-// SC SCHEMES - PS 26092 CORE - 5 SCHEMES
 const SC_SCHEMES = [
-{id:"nsfdc_micro",name:"NSFDC Micro Finance Scheme",ministry:"NSFDC-MoSJE",min:1000,max:140000,keys:["micro"],score:96,interest:"6.5%",coverage:"90%",reason:"For {biz} with cost {amount} ≤1.4L - 90% coverage @6.5% - Best match for small cart/vendor."},
-{id:"nsfdc_term",name:"NSFDC Term Loan Scheme",ministry:"NSFDC-MoSJE",min:140001,max:5000000,keys:["term"],score:94,interest:"8%",coverage:"90%",reason:"For {biz} with cost {amount} up to ₹50L - Term Loan 90% coverage @8% - For manufacturing/shop."},
-{id:"nsfdc_edu",name:"NSFDC Education Loan Scheme",ministry:"NSFDC-MoSJE",min:10000,max:2000000,keys:["education"],score:95,interest:"6.5%",coverage:"90%",reason:"For {biz} education cost {amount} - 90% tuition @6.5% with moratorium till course + 1 year."},
-{id:"mahila_samridhi",name:"Mahila Samridhi Yojana (SC Women)",ministry:"NSFDC",min:10000,max:140000,keys:["micro","term"],score:92,interest:"6%",coverage:"90%",reason:"Special for SC Women {biz} with {amount} - 6% interest, extra subsidy."},
-{id:"standup_sc",name:"Stand-Up India - SC Category",ministry:"DFS",min:1000000,max:10000000,keys:["term"],score:90,interest:"8%",coverage:"85%",reason:"For SC {biz} needing {amount} ₹10L-1Cr - For larger SC enterprise."}
+{id:"nsfdc_micro",name:"NSFDC Micro Finance Scheme",ministry:"NSFDC-MoSJE",min:1000,max:140000,keys:["micro"],score:96,interest:"6.5%",coverage:"90%",reason:"For {biz} with cost {amount} ≤1.4L - 90% coverage @6.5% - Best match."},
+{id:"nsfdc_term",name:"NSFDC Term Loan Scheme",ministry:"NSFDC-MoSJE",min:140001,max:5000000,keys:["term"],score:94,interest:"8%",coverage:"90%",reason:"For {biz} with cost {amount} up to ₹50L - Term Loan 90% @8%."},
+{id:"nsfdc_edu",name:"NSFDC Education Loan Scheme",ministry:"NSFDC-MoSJE",min:10000,max:2000000,keys:["education"],score:95,interest:"6.5%",coverage:"90%",reason:"For {biz} education cost {amount} - 90% tuition @6.5% with moratorium."},
+{id:"mahila_samridhi",name:"Mahila Samridhi Yojana (SC Women)",ministry:"NSFDC",min:10000,max:140000,keys:["micro","term"],score:92,interest:"6%",coverage:"90%",reason:"Special for SC Women {biz} with {amount} - 6% interest."},
+{id:"standup_sc",name:"Stand-Up India - SC Category",ministry:"DFS",min:1000000,max:10000000,keys:["term"],score:90,interest:"8%",coverage:"85%",reason:"For SC {biz} needing {amount} ₹10L-1Cr."}
 ];
-
-// BHARAT SCHEMES - 100 SCHEMES FOR INNOVATION
-const BHARAT_SCHEMES = [
-...SC_SCHEMES,
-{id:"pmmy_shishu",name:"PMMY Shishu ₹20k-50k",ministry:"DFS",min:20000,max:50000,keys:["micro","term"],score:88,interest:"10%",coverage:"100%",reason:"Micro loan {amount} for {biz} - no collateral."},
+const BHARAT_SCHEMES = [...SC_SCHEMES,
+{id:"pmmy_shishu",name:"PMMY Shishu ₹20k-50k",ministry:"DFS",min:20000,max:50000,keys:["micro","term"],score:88,interest:"10%",coverage:"100%",reason:"Micro loan {amount} for {biz}."},
 {id:"pmmy_kishor",name:"PMMY Kishor ₹50k-5L",ministry:"DFS",min:50001,max:500000,keys:["term"],score:86,interest:"11%",coverage:"100%",reason:"Growing {biz} needing {amount}."},
-{id:"pmegp",name:"PMEGP 15-35% Subsidy",ministry:"MSME",min:50000,max:2500000,keys:["term"],score:87,interest:"11%",coverage:"65%",reason:"Subsidy 35% rural 25% urban for {biz}."},
-{id:"cgtmse",name:"CGTMSE Collateral Free",ministry:"MSME",min:100000,max:50000000,keys:["term"],score:85,interest:"12%",coverage:"100%",reason:"No collateral up to 5Cr for {biz}."},
-{id:"vishwakarma",name:"PM Vishwakarma",ministry:"MSME",min:10000,max:300000,keys:["micro"],score:89,interest:"5%",coverage:"100%",reason:"Artisan toolkit + loan for {biz}."},
-{id:"svanidhi",name:"PM SVANidhi Vendor",ministry:"MoHUA",min:10000,max:50000,keys:["micro"],score:90,interest:"7%",coverage:"100%",reason:"Street vendor {biz} with {amount}."},
-{id:"zed",name:"MSME ZED Export",ministry:"MSME",min:50000,max:5000000,keys:["term"],score:90,interest:"9%",coverage:"100%",reason:"Best for domestic manufacturer aiming to export {biz}."},
-{id:"epcg",name:"EPCG Zero Duty Export",ministry:"Commerce",min:100000,max:50000000,keys:["term"],score:89,interest:"9%",coverage:"100%",reason:"Zero duty import for export {biz} - domestic manufacturer to export."},
-{id:"kcc",name:"KCC Allied",ministry:"Agriculture",min:10000,max:300000,keys:["micro"],score:84,interest:"4%",coverage:"100%",reason:"4% credit for dairy/farmer {biz}."},
-{id:"pmfme",name:"PMFME Food Processing 35%",ministry:"Food Processing",min:50000,max:1000000,keys:["term"],score:85,interest:"10%",coverage:"65%",reason:"35% subsidy for food {biz}."}
+{id:"pmegp",name:"PMEGP 15-35% Subsidy",ministry:"MSME",min:50000,max:2500000,keys:["term"],score:87,interest:"11%",coverage:"65%",reason:"Subsidy for {biz}."},
+{id:"vishwakarma",name:"PM Vishwakarma",ministry:"MSME",min:10000,max:300000,keys:["micro"],score:89,interest:"5%",coverage:"100%",reason:"Artisan loan for {biz}."},
+{id:"svanidhi",name:"PM SVANidhi Vendor",ministry:"MoHUA",min:10000,max:50000,keys:["micro"],score:90,interest:"7%",coverage:"100%",reason:"Street vendor {biz}."}
 ];
-
-let CURRENT_MODE = 'SC';
-let ALL_SCHEMES = SC_SCHEMES;
-
-// PARTNER DATABASE WITH NPA & FUND - CORE PS REQUIREMENT
+let CURRENT_MODE='SC'; let ALL_SCHEMES=SC_SCHEMES;
 const PARTNERS = [
 {name:"TN SC/ST Dev Corp (SCA) - Hosur",lat:12.711, lng:77.824, schemes:["Micro","Term","Education"], fund_used:68, npa:2.1, status:"GREEN", tat:"7 days", type:"SCA", dist:"1.2km"},
 {name:"Canara Bank MSME - Denkanikottai (PSB)",lat:12.730, lng:77.780, schemes:["Term","Education"], fund_used:89, npa:8.5, status:"YELLOW", tat:"15 days", type:"PSB", dist:"2.1km"},
@@ -126,69 +100,18 @@ const PARTNERS = [
 {name:"SIDBI Branch - Hosur",lat:12.715, lng:77.830, schemes:["Term"], fund_used:72, npa:3.0, status:"GREEN", tat:"8 days", type:"PSB", dist:"1.8km"},
 {name:"DIC Office - Krishnagiri",lat:12.520, lng:78.230, schemes:["Micro","Term"], fund_used:55, npa:2.5, status:"GREEN", tat:"10 days", type:"SCA", dist:"4.2km"}
 ];
-
-function setMode(m){
-CURRENT_MODE=m;
-if(m==='SC'){ALL_SCHEMES=SC_SCHEMES; document.getElementById('modeInfo').innerText='SC MODE: 5 SC Schemes | Income ≤5L | NPA-Aware Routing - PS 26092 Compliant'; document.getElementById('circleA_sub').innerText='5 SC Schemes • ≤5L'; document.getElementById('scBtn').style.background='#4f46e5'; document.getElementById('scBtn').style.color='white'; document.getElementById('allBtn').style.background='white'; document.getElementById('allBtn').style.color='#4f46e5';}
-else{ALL_SCHEMES=BHARAT_SCHEMES; document.getElementById('modeInfo').innerText='BHARAT MODE: '+ALL_SCHEMES.length+'+ Schemes | Pan-India | Multi-Tenant - Innovation Beyond PS'; document.getElementById('circleA_sub').innerText=ALL_SCHEMES.length+'+ Schemes • All India'; document.getElementById('allBtn').style.background='#4f46e5'; document.getElementById('allBtn').style.color='white'; document.getElementById('scBtn').style.background='white'; document.getElementById('scBtn').style.color='#4f46e5';}
-document.getElementById('resultA').style.display='none';
-}
-
+function setMode(m){CURRENT_MODE=m; if(m==='SC'){ALL_SCHEMES=SC_SCHEMES; document.getElementById('modeInfo').innerText='SC MODE: 5 SC Schemes | Income ≤5L | NPA-Aware Routing'; document.getElementById('circleA_sub').innerText='5 SC Schemes • ≤5L'; document.getElementById('scBtn').style.background='#4f46e5'; document.getElementById('scBtn').style.color='white'; document.getElementById('allBtn').style.background='white'; document.getElementById('allBtn').style.color='#4f46e5';} else {ALL_SCHEMES=BHARAT_SCHEMES; document.getElementById('modeInfo').innerText='BHARAT MODE: '+ALL_SCHEMES.length+'+ Schemes | Pan-India'; document.getElementById('circleA_sub').innerText=ALL_SCHEMES.length+'+ Schemes • All India'; document.getElementById('allBtn').style.background='#4f46e5'; document.getElementById('allBtn').style.color='white'; document.getElementById('scBtn').style.background='white'; document.getElementById('scBtn').style.color='#4f46e5';} document.getElementById('resultA').style.display='none';}
 function openModel(t){document.querySelectorAll('.model-section').forEach(s=>s.classList.remove('active')); if(t==='A')document.getElementById('modelA').classList.add('active'); if(t==='B'){document.getElementById('modelB').classList.add('active'); loadBData(); setTimeout(()=>map.invalidateSize(),300);} if(t==='C'){document.getElementById('modelC').classList.add('active'); loadCData(); setTimeout(()=>map.invalidateSize(),400);} window.scrollTo({top:500,behavior:'smooth'});}
-
-function analyzeStory(){
-let inc=parseInt(document.getElementById('income').value)||0; let cost=parseInt(document.getElementById('cost').value)||0; let ptype=document.getElementById('projectType').value; let caste=document.getElementById('caste').value;
-if(CURRENT_MODE==='SC' && inc>500000){document.getElementById('resultA').style.display='block'; document.getElementById('resultA').innerHTML=`<div class="scheme" style="border-left-color:red"><b>❌ Not Eligible - Family Income ₹${inc.toLocaleString()} exceeds ₹5L limit for SC schemes as per MoSJE</b><br>Switch to Bharat Mode for other schemes.</div>`; return;}
-if(cost===0){alert("Enter Estimated Cost");return;}
-let biz="Small Business"; if(ptype==='micro')biz="Cart/Vendor/Tailoring Business"; if(ptype==='term')biz="Manufacturing/Shop Unit"; if(ptype==='education')biz="Education";
-let key=ptype; let scored=ALL_SCHEMES.map(s=>{let sc=s.min<=cost&&cost<=s.max?s.score:s.score-35; if(s.keys.includes(key))sc+=10; if(caste==='yes'&&s.ministry.includes('NSFDC'))sc+=5; if(sc>99)sc=99; return{...s,final:sc,reason:s.reason.replace("{amount}","₹"+cost.toLocaleString()).replace("{biz}",biz)};});
-scored.sort((a,b)=>b.final-a.final); let top3=scored.slice(0,3);
-localStorage.setItem("selectedScheme",top3[0].name); localStorage.setItem("loanAmount",Math.round(cost*0.9)); localStorage.setItem("businessType",biz); localStorage.setItem("interest",top3[0].interest); localStorage.setItem("coverage",top3[0].coverage);
-let html=`<div style="margin-bottom:8px"><span class="tag">${CURRENT_MODE} MODE - ${ALL_SCHEMES.length} SCHEMES SCANNED</span> <b>${biz}</b> | Cost ₹${cost.toLocaleString()} | Income ₹${inc.toLocaleString()}</div>`;
-top3.forEach(s=>{html+=`<div class="scheme"><b>${s.name} - ${s.final}% Match</b> <span class="tag">${s.ministry}</span> <span class="tag">${s.interest} • ${s.coverage}</span><br><small>Range ₹${s.min.toLocaleString()}-₹${s.max.toLocaleString()}</small><br>${s.reason}</div>`;});
-html+=`<button class="mainBtn greenBtn" onclick="openModel('B')">Next → Financial Calculator (90% + Moratorium)</button>`;
-document.getElementById('resultA').style.display='block'; document.getElementById('resultA').innerHTML=html;
-}
-
-function loadBData(){
-let s=localStorage.getItem("selectedScheme")||"Run Model A"; let l=localStorage.getItem("loanAmount")||"90000"; let b=localStorage.getItem("businessType")||""; let intr=localStorage.getItem("interest")||"6.5";
-document.getElementById('schemeName').value=s; document.getElementById('loanAmt').value=l; document.getElementById('intPct').value=parseFloat(intr); document.getElementById('fromAInfo').innerHTML=`✅ From Model A: <b>${s}</b> | ${b} | Loan 90% = ₹${parseInt(l).toLocaleString()}`;
-}
-function calcEMI(){
-let L=parseFloat(document.getElementById('loanAmt').value); let r=parseFloat(document.getElementById('intPct').value)/12/100; let n=parseFloat(document.getElementById('tenure').value); let mora=parseInt(document.getElementById('mora').value)||0;
-let subAmt=L*0.1; let emi=(L*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
-localStorage.setItem("calculatedEMI",emi.toFixed(0));
-document.getElementById('resultB').style.display='block';
-document.getElementById('resultB').innerHTML=`<b style="color:green">90% Loan: ₹${L.toLocaleString()} | Moratorium ${mora} months interest-only</b><br>After moratorium EMI: <b>₹${emi.toFixed(0)}/month for ${n} months</b><br>Total Interest: ₹${(emi*n-L).toFixed(0).toLocaleString()}<br><small>Moratorium: No payment or interest-only for ${mora} months as per scheme</small><br><br><button class="mainBtn purpleBtn" onclick="openModel('C')">Next → Find Healthy Partner (NPA Filter)</button>`;
-}
-
+function analyzeStory(){let inc=parseInt(document.getElementById('income').value)||0; let cost=parseInt(document.getElementById('cost').value)||0; let ptype=document.getElementById('projectType').value; let caste=document.getElementById('caste').value; if(CURRENT_MODE==='SC' && inc>500000){document.getElementById('resultA').style.display='block'; document.getElementById('resultA').innerHTML=`<div class="scheme" style="border-left-color:red"><b>❌ Not Eligible - Income ₹${inc.toLocaleString()} exceeds ₹5L limit for SC schemes</b></div>`; return;} if(cost===0){alert("Enter Estimated Cost");return;} let biz="Small Business"; if(ptype==='micro')biz="Cart/Vendor/Tailoring Business"; if(ptype==='term')biz="Manufacturing/Shop Unit"; if(ptype==='education')biz="Education"; let key=ptype; let scored=ALL_SCHEMES.map(s=>{let sc=s.min<=cost&&cost<=s.max?s.score:s.score-35; if(s.keys.includes(key))sc+=10; if(caste==='yes'&&s.ministry.includes('NSFDC'))sc+=5; if(sc>99)sc=99; return{...s,final:sc,reason:s.reason.replace("{amount}","₹"+cost.toLocaleString()).replace("{biz}",biz)};}); scored.sort((a,b)=>b.final-a.final); let top3=scored.slice(0,3); localStorage.setItem("selectedScheme",top3[0].name); localStorage.setItem("loanAmount",Math.round(cost*0.9)); localStorage.setItem("businessType",biz); localStorage.setItem("interest",top3[0].interest); let html=`<div style="margin-bottom:8px"><span class="tag">${CURRENT_MODE} MODE - ${ALL_SCHEMES.length} SCHEMES SCANNED</span> <b>${biz}</b> | Cost ₹${cost.toLocaleString()} | Income ₹${inc.toLocaleString()}</div>`; top3.forEach(s=>{html+=`<div class="scheme"><b>${s.name} - ${s.final}% Match</b> <span class="tag">${s.ministry}</span> <span class="tag">${s.interest} • ${s.coverage}</span><br><small>Range ₹${s.min.toLocaleString()}-₹${s.max.toLocaleString()}</small><br>${s.reason}</div>`;}); html+=`<button class="mainBtn greenBtn" onclick="openModel('B')">Next → Financial Calculator (90% + Moratorium)</button>`; document.getElementById('resultA').style.display='block'; document.getElementById('resultA').innerHTML=html;}
+function loadBData(){let s=localStorage.getItem("selectedScheme")||"Run Model A"; let l=localStorage.getItem("loanAmount")||"90000"; let b=localStorage.getItem("businessType")||""; let intr=localStorage.getItem("interest")||"6.5"; document.getElementById('schemeName').value=s; document.getElementById('loanAmt').value=l; document.getElementById('intPct').value=parseFloat(intr); document.getElementById('fromAInfo').innerHTML=`✅ From Model A: <b>${s}</b> | ${b} | Loan 90% = ₹${parseInt(l).toLocaleString()}`;}
+function calcEMI(){let L=parseFloat(document.getElementById('loanAmt').value); let r=parseFloat(document.getElementById('intPct').value)/12/100; let n=parseFloat(document.getElementById('tenure').value); let mora=parseInt(document.getElementById('mora').value)||0; let emi=(L*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1); localStorage.setItem("calculatedEMI",emi.toFixed(0)); document.getElementById('resultB').style.display='block'; document.getElementById('resultB').innerHTML=`<b style="color:green">90% Loan: ₹${L.toLocaleString()} | Moratorium ${mora} months</b><br>After moratorium EMI: <b>₹${emi.toFixed(0)}/month for ${n} months</b><br>Total Interest: ₹${(emi*n-L).toFixed(0).toLocaleString()}<br><br><button class="mainBtn purpleBtn" onclick="openModel('C')">Next → Find Healthy Partner (NPA Filter)</button>`;}
 var map=L.map('map').setView([12.71,77.82],11); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(map);
-var userMarker=L.marker([12.71,77.82]).addTo(map).bindPopup("You - Hosur").openPopup();
-var partnerMarker=L.marker([12.711,77.824]).addTo(map).bindPopup("SCA Hosur");
-var routeLine=null;
-
-function loadCData(){
-let s=localStorage.getItem("selectedScheme")||"Scheme"; let l=localStorage.getItem("loanAmount")||"90000"; let emi=localStorage.getItem("calculatedEMI")||"--";
-document.getElementById('infoC').innerHTML=`✅ From A&B: <b>${s}</b> | Loan ₹${parseInt(l).toLocaleString()} | EMI ₹${emi}`;
-let sel=document.getElementById('partnerSel'); sel.innerHTML="";
-let healthy=PARTNERS.filter(p=>p.status!=='RED' && p.fund_used<90);
-healthy.forEach((p,i)=>{let o=document.createElement('option'); o.value=i; o.text=`${p.status==='GREEN'?'✅':'⚠️'} ${p.name} - ${p.dist} - Fund ${p.fund_used}% - NPA ${p.npa}%`; sel.appendChild(o);});
-changePartner(); renderPartnerList(); setTimeout(()=>map.invalidateSize(),400);
-}
-function renderPartnerList(){
-let div=document.getElementById('partnerList'); let html=`<div style="margin-top:12px"><b style="font-size:13px">Channel Partners - Fund & NPA Health Check (PS Requirement)</b></div>`;
-PARTNERS.forEach(p=>{
-let cls=p.status==='RED'?'red':p.status==='YELLOW'?'yellow':''; let hs=Math.round((100-p.fund_used)*0.4 + (100-p.npa*5)*0.4 + 20);
-html+=`<div class="partner ${cls}"><b>${p.status==='GREEN'?'✅':p.status==='YELLOW'?'⚠️':'❌'} ${p.name}</b> <span class="tag">${p.type}</span> <span class="tag">${p.status}</span><br>Handles: ${p.schemes.join(', ')} | Fund Used: ${p.fund_used}% | NPA: ${p.npa}% | TAT: ${p.tat} | Health: ${hs}/100 - ${p.dist}<br>${p.status==='RED'?'<small style="color:red">⚠️ EXCLUDED - High NPA / Fund Overutilized - Application will be misrouted if sent here</small>':'<small style="color:green">✔ Eligible for routing - Healthy partner</small>'}</div>`;
-});
-div.innerHTML=html;
-}
-function changePartner(){
-let sel=document.getElementById('partnerSel'); if(!sel.value) return; let idx=parseInt(sel.value); let healthy=PARTNERS.filter(p=>p.status!=='RED' && p.fund_used<90); let p=healthy[idx]; if(!p) return;
-if(partnerMarker)map.removeLayer(partnerMarker); partnerMarker=L.marker([p.lat,p.lng]).addTo(map).bindPopup(p.name).openPopup(); if(routeLine)map.removeLayer(routeLine); document.getElementById('routeCard').style.display='none';
-}
+var userMarker=L.marker([12.71,77.82]).addTo(map).bindPopup("You - Hosur").openPopup(); var partnerMarker=L.marker([12.711,77.824]).addTo(map).bindPopup("SCA Hosur"); var routeLine=null;
+function loadCData(){let s=localStorage.getItem("selectedScheme")||"Scheme"; let l=localStorage.getItem("loanAmount")||"90000"; let emi=localStorage.getItem("calculatedEMI")||"--"; document.getElementById('infoC').innerHTML=`✅ From A&B: <b>${s}</b> | Loan ₹${parseInt(l).toLocaleString()} | EMI ₹${emi}`; let sel=document.getElementById('partnerSel'); sel.innerHTML=""; let healthy=PARTNERS.filter(p=>p.status!=='RED' && p.fund_used<90); healthy.forEach((p,i)=>{let o=document.createElement('option'); o.value=i; o.text=`${p.status==='GREEN'?'✅':'⚠️'} ${p.name} - ${p.dist} - Fund ${p.fund_used}% - NPA ${p.npa}%`; sel.appendChild(o);}); changePartner(); renderPartnerList(); setTimeout(()=>map.invalidateSize(),400);}
+function renderPartnerList(){let div=document.getElementById('partnerList'); let html=`<div style="margin-top:12px"><b style="font-size:13px">Channel Partners - Fund & NPA Health Check</b></div>`; PARTNERS.forEach(p=>{let cls=p.status==='RED'?'red':p.status==='YELLOW'?'yellow':''; let hs=Math.round((100-p.fund_used)*0.4 + (100-p.npa*5)*0.4 + 20); html+=`<div class="partner ${cls}"><b>${p.status==='GREEN'?'✅':p.status==='YELLOW'?'⚠️':'❌'} ${p.name}</b> <span class="tag">${p.type}</span> <span class="tag">${p.status}</span><br>Handles: ${p.schemes.join(', ')} | Fund Used: ${p.fund_used}% | NPA: ${p.npa}% | TAT: ${p.tat} | Health: ${hs}/100 - ${p.dist}<br>${p.status==='RED'?'<small style="color:red">⚠️ EXCLUDED - High NPA / Fund Overutilized - misrouted if sent here</small>':'<small style="color:green">✔ Eligible for routing - Healthy partner</small>'}</div>`;}); div.innerHTML=html;}
+function changePartner(){let sel=document.getElementById('partnerSel'); if(!sel.value) return; let idx=parseInt(sel.value); let healthy=PARTNERS.filter(p=>p.status!=='RED' && p.fund_used<90); let p=healthy[idx]; if(!p) return; if(partnerMarker)map.removeLayer(partnerMarker); partnerMarker=L.marker([p.lat,p.lng]).addTo(map).bindPopup(p.name).openPopup(); if(routeLine)map.removeLayer(routeLine); document.getElementById('routeCard').style.display='none';}
 function useMyLocation(){navigator.geolocation.getCurrentPosition(pos=>{let lat=pos.coords.latitude,lon=pos.coords.longitude; map.setView([lat,lon],12); if(userMarker)map.removeLayer(userMarker); userMarker=L.marker([lat,lon]).addTo(map).bindPopup("You here").openPopup();});}
-function findRoute(){let u=userMarker.getLatLng(),p=partnerMarker.getLatLng(); if(routeLine)map.removeLayer(routeLine); routeLine=L.polyline([u,p],{color:'blue',weight:5}).addTo(map); map.fitBounds([u,p],{padding:[60,60]}); let d=map.distance(u,p); document.getElementById('routeCard').style.display='block'; document.getElementById('routeCard').innerHTML=`✅ Route Found - Application will be routed to HEALTHY partner<br>Distance: <b>${(d/1000).toFixed(1)} km</b> | Time: <b>${Math.round(d/500)} mins</b> | Auto: ₹${Math.round(d/40)}<br><small>Ensures no misrouting, no delay - As per PS Impact Goal</small>`;}
+function findRoute(){let u=userMarker.getLatLng(),p=partnerMarker.getLatLng(); if(routeLine)map.removeLayer(routeLine); routeLine=L.polyline([u,p],{color:'blue',weight:5}).addTo(map); map.fitBounds([u,p],{padding:[60,60]}); let d=map.distance(u,p); document.getElementById('routeCard').style.display='block'; document.getElementById('routeCard').innerHTML=`✅ Route Found - Healthy partner<br>Distance: <b>${(d/1000).toFixed(1)} km</b> | Time: <b>${Math.round(d/500)} mins</b> | Auto: ₹${Math.round(d/40)}`;}
 function openGMap(){let p=partnerMarker.getLatLng(),u=userMarker.getLatLng(); window.open(`https://www.google.com/maps/dir/${u.lat},${u.lng}/${p.lat},${p.lng}/`,'_blank');}
 function startVoice(){let rec=new (window.SpeechRecognition||window.webkitSpeechRecognition)(); rec.lang='en-IN'; rec.onresult=e=>{document.getElementById('cost').value=e.results[0][0].transcript.replace(/[^0-9]/g,'').slice(0,6);}; rec.start();}
 </script>
