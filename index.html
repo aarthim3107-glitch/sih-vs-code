@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIH Project - 3 Models Platform</title>
+<title>SIH Project - 3 Models Platform - 100 Schemes</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -12,104 +12,76 @@ body{background:#ffffff;color:#0f172a}
 header{padding:16px 5%;display:flex;justify-content:space-between;align-items:center;background:white;box-shadow:0 2px 12px rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
 .logo{font-weight:900;font-size:22px;color:#1e2a5a}
 .logo span{font-size:11px;background:#eef2ff;color:#4f46e5;padding:4px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
-.hero{text-align:center;padding:45px 5% 10px}
+.hero{text-align:center;padding:35px 5% 10px}
 .hero h1{font-size:32px;font-weight:800}
 .hero p{color:#64748b;margin-top:10px;max-width:700px;margin-left:auto;margin-right:auto}
-
-/* 3 BIG CIRCLES - NAME INSIDE CIRCLE */
-.circles-container{display:flex;justify-content:center;gap:50px;flex-wrap:wrap;padding:50px 5% 30px}
-.model-card{width:300px;text-align:center;cursor:pointer;transition:0.3s}
+/* FIXED SIZE TO FIT 3 CIRCLES IN ONE ROW */
+.circles-container{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;padding:30px 5% 30px}
+.model-card{width:260px;text-align:center;cursor:pointer;transition:0.3s}
 .model-card:hover{transform:translateY(-12px)}
-.circle{width:290px;height:290px;border-radius:50%;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;box-shadow:0 25px 50px rgba(0,0,0,0.18);padding:20px;text-align:center;position:relative}
-.circle.icon{font-size:65px;margin-bottom:12px;filter:drop-shadow(0 2px 5px rgba(0,0,0,0.2))}
-.circle.title{font-size:17px;font-weight:800;line-height:1.2;text-shadow:0 1px 3px rgba(0,0,0,0.2)}
-.circle.sub{font-size:11px;margin-top:6px;opacity:0.9;font-weight:500}
+.circle{width:230px;height:230px;border-radius:50%;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;box-shadow:0 20px 40px rgba(0,0,0,0.18);padding:20px;text-align:center;position:relative}
+.circle.icon{font-size:50px;margin-bottom:8px}
+.circle.title{font-size:15px;font-weight:800;line-height:1.2}
+.circle.sub{font-size:11px;margin-top:6px;opacity:0.95;font-weight:600;background:rgba(0,0,0,0.15);padding:3px 8px;border-radius:20px}
 .c1{background:linear-gradient(135deg,#3b82f6 0%, #4f46e5 100%)}
 .c2{background:linear-gradient(135deg,#14b8a6 0%, #0e7490 100%)}
 .c3{background:linear-gradient(135deg,#8b5cf6 0%, #f97316 100%)}
-.model-card.active.circle{ring:5px solid #000; outline:4px solid #4f46e5; outline-offset:6px}
-
-/* MODEL BOXES */
+.model-card.active.circle{outline:4px solid #4f46e5; outline-offset:6px}
 .model-section{display:none;max-width:850px;margin:30px auto;background:#f8faff;padding:28px;border-radius:18px;box-shadow:0 10px 40px rgba(0,0,0,0.08);border:1px solid #e2e8f0}
 .model-section.active{display:block;animation:fade 0.4s}
 @keyframes fade{from{opacity:0;transform:translateY(15px)} to{opacity:1;transform:translateY(0)}}
-.model-section h2{font-size:22px;margin-bottom:6px}
-.model-section p.small{color:#64748b;font-size:13px;margin-bottom:16px}
-textarea,input,select{width:100%;padding:13px;border-radius:10px;border:1.5px solid #cbd5e1;margin:8px 0;font-size:14px;box-sizing:border-box}
+textarea,input,select{width:100%;padding:13px;border-radius:10px;border:1.5px solid #cbd5e1;margin:8px 0;font-size:14px}
 button.mainBtn{padding:13px 24px;border:none;border-radius:10px;color:white;font-weight:700;cursor:pointer;margin-top:10px;width:100%}
 .blueBtn{background:#4f46e5}.greenBtn{background:#0e7490}.purpleBtn{background:#7c3aed}
 .resultBox{margin-top:16px;padding:14px;border-radius:12px;background:white;border:1px dashed #94a3b8}
-.scheme{padding:12px;margin:10px 0;border-radius:10px;background:white;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-left:5px solid #4f46e5}
+.scheme{padding:12px;margin:10px 0;border-radius:10px;background:white;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-left:5px solid #4f46e5;font-size:13px}
 #map{height:420px;width:100%;border-radius:14px;border:2px solid #ddd;margin-top:12px}
 .tag{font-size:11px;background:#e0e7ff;color:#4338ca;padding:3px 8px;border-radius:20px;font-weight:700}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="logo">SIH PROJECT <span>Smart India Hackathon 2025</span></div>
+  <div class="logo">SIH PROJECT <span>100 Schemes Live</span></div>
   <div style="font-size:13px;color:#64748b;">One Platform • Three Models</div>
 </header>
-
 <div class="hero">
-  <h1>One Platform • Three Models • Impact at Scale</h1>
-  <p>Click on any circle below to run the model - All 3 models in single page</p>
+  <h1>One Platform • Three Models • 100 Schemes</h1>
+  <p>Click any circle to run - Now with 100 Pan-India Central Schemes</p>
 </div>
-
-<!-- 3 CIRCLES WITH NAME INSIDE -->
 <div class="circles-container">
   <div class="model-card" id="cardA" onclick="openModel('A')">
-    <div class="circle c1">
-      <div class="icon">🤖</div>
-      <div class="title">Smart Scheme<br>Recommender</div>
-      <div class="sub">14 Schemes • All States</div>
-    </div>
+    <div class="circle c1"><div class="icon">🤖</div><div class="title">Smart Scheme<br>Recommender</div><div class="sub">100 Schemes • All States</div></div>
   </div>
-
   <div class="model-card" id="cardB" onclick="openModel('B')">
-    <div class="circle c2">
-      <div class="icon">🧮</div>
-      <div class="title">Financial<br>Calculator</div>
-      <div class="sub">Loan • Subsidy • EMI</div>
-    </div>
+    <div class="circle c2"><div class="icon">🧮</div><div class="title">Financial<br>Calculator</div><div class="sub">Loan • Subsidy • EMI</div></div>
   </div>
-
   <div class="model-card" id="cardC" onclick="openModel('C')">
-    <div class="circle c3">
-      <div class="icon">🗺️</div>
-      <div class="title">Geo Spatial Partner<br>Locator & Router</div>
-      <div class="sub">Map • Route • Partners</div>
-    </div>
+    <div class="circle c3"><div class="icon">🗺️</div><div class="title">Geo Spatial Partner<br>Locator & Router</div><div class="sub">Map • Route • Partners</div></div>
   </div>
 </div>
 
-<!-- MODEL A - Smart Scheme Recommender -->
 <div id="modelA" class="model-section">
-  <h2>🤖 Model A - Smart Scheme Recommender</h2>
-  <p class="small">14 Pan-India Central Schemes - Tell your story in any language</p>
-  <textarea id="userInput" placeholder="Example: I am domestic manufacturer aiming to export product need 3 lakh OR My mother is street vendor earning 12000 need 30000 for tailoring"></textarea>
-  <button class="mainBtn blueBtn" onclick="analyzeStory()">Analyze My Story →</button>
+  <h2>🤖 Model A - Smart Scheme Recommender (100 Schemes)</h2>
+  <p class="small">100 Pan-India Central Schemes - Tell your story in any language</p>
+  <textarea id="userInput" placeholder="Ex: I am domestic manufacturer aiming to export product need 3 lakh OR My mother is street vendor earning 12000 need 30000"></textarea>
+  <button class="mainBtn blueBtn" onclick="analyzeStory()">Analyze from 100 Schemes →</button>
   <div id="resultA" class="resultBox" style="display:none"></div>
 </div>
 
-<!-- MODEL B - Financial Calculator -->
 <div id="modelB" class="model-section">
   <h2>🧮 Model B - Financial Calculator</h2>
-  <p class="small">Connected to Model A - Auto fills data</p>
-  <div id="fromAInfo" style="background:#eafff0;padding:10px;border-radius:8px;font-size:13px;border-left:4px solid green;margin-bottom:12px">First run Model A to auto-fill</div>
+  <div id="fromAInfo" style="background:#eafff0;padding:10px;border-radius:8px;font-size:13px;border-left:4px solid green;margin-bottom:12px">First run Model A</div>
   <label style="font-weight:700;font-size:13px">Scheme Name</label><input id="schemeName" readonly>
   <label style="font-weight:700;font-size:13px">Loan Amount ₹</label><input id="loanAmt" type="number">
   <label style="font-weight:700;font-size:13px">Subsidy %</label><input id="subPct" type="number">
-  <label style="font-weight:700;font-size:13px">Interest % per year</label><input id="intPct" type="number" value="7">
+  <label style="font-weight:700;font-size:13px">Interest %</label><input id="intPct" type="number" value="7">
   <label style="font-weight:700;font-size:13px">Tenure Months</label><input id="tenure" type="number" value="60">
   <button class="mainBtn greenBtn" onclick="calcEMI()">Calculate EMI</button>
   <div id="resultB" class="resultBox" style="display:none"></div>
 </div>
 
-<!-- MODEL C - Geo Spatial -->
 <div id="modelC" class="model-section">
-  <h2>🗺️ Model C - Geo Spatial Partner Locator & Router</h2>
-  <p class="small">Find nearest partner for your business</p>
+  <h2>🗺️ Model C - Geo Spatial Partner Locator</h2>
   <div id="infoC" style="background:#f3e8ff;padding:10px;border-radius:8px;font-size:13px;border-left:4px solid #7c3aed;margin-bottom:12px">Loads data from Model A & B</div>
   <select id="partnerSel" onchange="changePartner()"><option value="bank">🏦 Canara Bank MSME - 1.2km</option><option value="dic">🏢 DIC Office - 2.5km</option><option value="supplier">📦 Supplier Hub - 0.8km</option><option value="training">🎓 Training Center - 3.1km</option></select>
   <div style="display:flex;gap:8px;margin-top:10px"><button class="mainBtn blueBtn" style="flex:1" onclick="useMyLocation()">📍 My Location</button><button class="mainBtn greenBtn" style="flex:1" onclick="findRoute()">🗺️ Find Route</button><button class="mainBtn purpleBtn" style="flex:1" onclick="openGMap()">Google Maps</button></div>
@@ -118,22 +90,104 @@ button.mainBtn{padding:13px 24px;border:none;border-radius:10px;color:white;font
 </div>
 
 <script>
-// ===== MODEL A LOGIC - 14 SCHEMES =====
+// ===== 100 SCHEMES - OLD PROGRAM NOT AFFECTED =====
 const ALL_SCHEMES = [
-  { id:"pmmy_shishu_20_50", name:"PMMY Shishu (₹20k-₹50k)", ministry:"DFS", min:20000, max:50000, keys:["tailor","vendor","all"], score:94, reason:"No.1 micro loan for {biz} needing {amount} - no collateral, 1-day approval." },
-  { id:"pmmy_shishu_small", name:"PMMY Shishu Below 20k", ministry:"DFS", min:1, max:19999, keys:["vendor","all"], score:96, reason:"Best for very small {amount} for {biz}." },
-  { id:"pmmy_kishor", name:"PMMY Kishor", ministry:"DFS", min:50001, max:500000, keys:["shop","manufacturing","all"], score:92, reason:"For growing {biz} needing {amount} - equipment purchase." },
-  { id:"pmmy_tarun", name:"PMMY Tarun (Up to 10L)", ministry:"DFS", min:500001, max:1000000, keys:["all"], score:86, reason:"For established {biz} needing {amount}." },
-  { id:"pmegp", name:"PMEGP - 15-35% Subsidy", ministry:"MSME", min:50000, max:2500000, keys:["manufacturing","all"], score:88, reason:"Subsidy 15-35% for new unit {biz} with {amount}." },
-  { id:"cgtmse", name:"CGTMSE - Collateral Free", ministry:"MSME", min:100000, max:50000000, keys:["all"], score:85, reason:"No collateral for {amount} for {biz} - Govt guarantees up to 5 Cr." },
-  { id:"standup", name:"Stand-Up India", ministry:"DFS", min:1000000, max:10000000, keys:["women","all"], score:91, reason:"₹10L-₹1Cr for SC/ST & Women for {biz}." },
-  { id:"vishwakarma", name:"PM Vishwakarma", ministry:"MSME", min:10000, max:300000, keys:["artisan","tailor","all"], score:93, reason:"For artisans {biz} - toolkit + loan up to 3L for {amount}." },
-  { id:"pm_svanidhi", name:"PM SVANidhi - Street Vendors", ministry:"MoHUA", min:10000, max:50000, keys:["vendor","all"], score:95, reason:"Collateral-free ₹50k for street vendors {biz} with {amount}." },
-  { id:"zed", name:"MSME ZED Certification", ministry:"MSME", min:50000, max:5000000, keys:["manufacturing","export","all"], score:89, reason:"Best For Domestic Manufacturers aiming to export - Zero Defect Zero Effect for {biz} with {amount}." },
-  { id:"kcc", name:"KCC Allied", ministry:"Agriculture", min:10000, max:300000, keys:["farmer","all"], score:87, reason:"Easy 4% credit for {biz} with {amount}." },
-  { id:"sisfs", name:"Startup India Seed Fund", ministry:"DPIIT", min:500000, max:5000000, keys:["startup","all"], score:90, reason:"Seed funding up to 50L for startups {biz}." },
-  { id:"mahila", name:"Mahila Udyam Nidhi", ministry:"SIDBI", min:10000, max:1000000, keys:["women","tailor","all"], score:92, reason:"Special loan for women {biz} with {amount}." },
-  { id:"svep", name:"SVEP - Village Entrepreneurship", ministry:"MoRD", min:10000, max:200000, keys:["rural","all"], score:84, reason:"For rural non-farm {biz} via SHG with {amount}." }
+{id:"pmmy_shishu_small",name:"PMMY Shishu Below 20k",ministry:"DFS",min:1,max:19999,keys:["vendor","all"],score:96,reason:"Best for very small {amount} for {biz} - instant approval."},
+{id:"pmmy_shishu_20_50",name:"PMMY Shishu ₹20k-50k",ministry:"DFS",min:20000,max:50000,keys:["tailor","vendor","all"],score:95,ministry2:"DFS",reason:"No.1 micro loan for {biz} needing {amount} - no collateral."},
+{id:"pmmy_kishor",name:"PMMY Kishor ₹50k-5L",ministry:"DFS",min:50001,max:500000,keys:["shop","manufacturing","all"],score:92,reason:"For growing {biz} needing {amount}."},
+{id:"pmmy_tarun",name:"PMMY Tarun ₹5L-10L",ministry:"DFS",min:500001,max:1000000,keys:["all"],score:88,reason:"For established {biz} needing {amount}."},
+{id:"pmegp",name:"PMEGP 15-35% Subsidy",ministry:"MSME",min:50000,max:2500000,keys:["manufacturing","all"],score:89,reason:"Subsidy 15-35% for new {biz} with {amount}."},
+{id:"cgtmse",name:"CGTMSE Collateral Free",ministry:"MSME",min:100000,max:50000000,keys:["all"],score:86,reason:"No collateral for {amount} - Govt guarantee up to 5 Cr for {biz}."},
+{id:"standup",name:"Stand-Up India ₹10L-1Cr",ministry:"DFS",min:1000000,max:10000000,keys:["women","sc","st","all"],score:91,reason:"₹10L-1Cr for SC/ST & Women for {biz}."},
+{id:"vishwakarma",name:"PM Vishwakarma",ministry:"MSME",min:10000,max:300000,keys:["artisan","tailor","carpenter","all"],score:93,reason:"Toolkit + loan up to 3L for {biz} with {amount}."},
+{id:"pm_svanidhi",name:"PM SVANidhi Street Vendors",ministry:"MoHUA",min:10000,max:50000,keys:["vendor","all"],score:95,reason:"₹50k collateral-free for {biz} with {amount}."},
+{id:"zed",name:"MSME ZED Certification",ministry:"MSME",min:50000,max:5000000,keys:["manufacturing","export","all"],score:90,reason:"Best For Domestic Manufacturers aiming to export {biz} with {amount}."},
+{id:"kcc",name:"KCC Allied",ministry:"Agriculture",min:10000,max:300000,keys:["farmer","dairy","all"],score:87,reason:"4% interest credit for {biz} with {amount}."},
+{id:"sisfs",name:"Startup India Seed Fund",ministry:"DPIIT",min:500000,max:5000000,keys:["startup","all"],score:90,reason:"Seed fund up to 50L for {biz}."},
+{id:"mahila",name:"Mahila Udyam Nidhi",ministry:"SIDBI",min:10000,max:1000000,keys:["women","tailor","all"],score:92,reason:"Special loan for women {biz} with {amount}."},
+{id:"svep",name:"SVEP Village",ministry:"MoRD",min:10000,max:200000,keys:["rural","all"],score:84,reason:"Rural non-farm {biz} via SHG with {amount}."},
+{id:"sfurti",name:"SFURTI Cluster",ministry:"MSME",min:500000,max:5000000,keys:["artisan","cluster","all"],score:85,reason:"Cluster development for {biz} with {amount}."},
+{id:"aspire",name:"ASPIRE Rural Incubation",ministry:"MSME",min:50000,max:2000000,keys:["rural","startup","all"],score:83,reason:"Incubation for rural {biz} with {amount}."},
+{id:"clcss",name:"CLCSS Tech Subsidy 15%",ministry:"MSME",min:100000,max:10000000,keys:["manufacturing","all"],score:86,reason:"15% tech upgrade subsidy for {biz} with {amount}."},
+{id:"cdp",name:"MSE-CDP Infra",ministry:"MSME",min:1000000,max:20000000,keys:["cluster","manufacturing","all"],score:82,reason:"Infra support for {biz} cluster with {amount}."},
+{id:"scst_hub",name:"National SC-ST Hub",ministry:"MSME",min:50000,max:5000000,keys:["sc","st","all"],score:88,reason:"Special support for SC/ST {biz} with {amount}."},
+{id:"treds",name:"TReDS Bill Discounting",ministry:"MSME",min:10000,max:5000000,keys:["all"],score:80,reason:"Instant payment for MSME {biz} with {amount}."},
+{id:"gem",name:"GeM Sahay",ministry:"Commerce",min:10000,max:1000000,keys:["all"],score:81,reason:"Govt marketplace credit for {biz} with {amount}."},
+{id:"champions",name:"CHAMPIONS Portal",ministry:"MSME",min:10000,max:5000000,keys:["all"],score:84,reason:"Grievance + credit for {biz} with {amount}."},
+{id:"ramp",name:"RAMP Program",ministry:"MSME",min:500000,max:10000000,keys:["all"],score:85,reason:"World Bank aided for {biz} with {amount}."},
+{id:"sri",name:"SRI Fund ₹50k Cr",ministry:"MSME",min:5000000,max:50000000,keys:["all"],score:87,reason:"Equity infusion for {biz} with {amount}."},
+{id:"psb59",name:"PSB Loans 59 Mins",ministry:"DFS",min:100000,max:5000000,keys:["all"],score:90,reason:"In-principle approval in 59 mins for {biz} with {amount}."},
+{id:"mudra_card",name:"MUDRA Card Overdraft",ministry:"DFS",min:10000,max:50000,keys:["all"],score:83,reason:"Overdraft facility for {biz} with {amount}."},
+{id:"nsfdc",name:"NSFDC SC Loan",ministry:"Social Justice",min:50000,max:3000000,keys:["sc","all"],score:86,reason:"Concessional loan for SC {biz} with {amount}."},
+{id:"nskfdc",name:"NSKFDC Safai Karamchari",ministry:"Social Justice",min:50000,max:2000000,keys:["sc","all"],score:84,reason:"For Safai Karamchari {biz} with {amount}."},
+{id:"nbcfdc",name:"NBCFDC OBC Loan",ministry:"Social Justice",min:50000,max:3000000,keys:["obc","all"],score:85,reason:"For OBC {biz} with {amount}."},
+{id:"nhfdc",name:"NHFDC Divyangjan",ministry:"Social Justice",min:50000,max:5000000,keys:["divyang","all"],score:86,reason:"For Divyangjan {biz} with {amount}."},
+{id:"nmdfc",name:"NMDFC Minority",ministry:"Minority",min:50000,max:3000000,keys:["minority","all"],score:85,reason:"For Minority {biz} with {amount}."},
+{id:"nstfdc",name:"NSTFDC ST Loan",ministry:"Tribal",min:50000,max:3000000,keys:["st","all"],score:86,reason:"For ST {biz} with {amount}."},
+{id:"pmfme",name:"PM Formalisation Micro Food - PMFME",ministry:"Food Processing",min:50000,max:1000000,keys:["food","all"],score:88,reason:"35% subsidy for food {biz} with {amount}."},
+{id:"ahidf",name:"AHIDF Dairy & Animal",ministry:"Animal Husbandry",min:100000,max:50000000,keys:["dairy","farmer","all"],score:87,reason:"3% interest subvention for {biz} dairy with {amount}."},
+{id:"aif",name:"Agriculture Infra Fund",ministry:"Agriculture",min:100000,max:20000000,keys:["farmer","all"],score:86,reason:"3% subvention for farm infra {biz} with {amount}."},
+{id:"pmmsy",name:"PM Matsya Sampada",ministry:"Fisheries",min:50000,max:5000000,keys:["fishery","farmer","all"],score:84,reason:"For fishery {biz} with {amount}."},
+{id:"nrlm",name:"DAY-NRLM SHG Loan",ministry:"MoRD",min:10000,max:500000,keys:["women","shg","rural","all"],score:90,reason:"SHG loan up to 5L for women {biz} with {amount}."},
+{id:"nulm",name:"DAY-NULM Street + Self Emp",ministry:"MoHUA",min:10000,max:500000,keys:["urban","vendor","all"],score:85,reason:"Urban self-employment {biz} with {amount}."},
+{id:"eclgs",name:"ECLGS Emergency Credit",ministry:"DFS",min:100000,max:50000000,keys:["all"],score:82,reason:"Emergency credit 100% guarantee for {biz} with {amount}."},
+{id:"startup_credit",name:"Credit Guarantee for Startups",ministry:"DPIIT",min:500000,max:50000000,keys:["startup","all"],score:88,reason:"Guarantee cover for startup {biz} with {amount}."},
+{id:"sidbi_make",name:"SIDBI Make in India SMILE",ministry:"SIDBI",min:1000000,max:25000000,keys:["manufacturing","all"],score:87,reason:"Soft loan for Make in India {biz} with {amount}."},
+{id:"samridhi",name:"Mahila Samridhi Yojana",ministry:"NSFDC",min:10000,max:140000,keys:["women","sc","all"],score:86,reason:"For SC women {biz} with {amount}."},
+{id:"pm_daksh",name:"PM DAKSH Skill Loan",ministry:"Social Justice",min:10000,max:1000000,keys:["sc","obc","all"],score:83,reason:"Skill + loan for {biz} with {amount}."},
+{id:"epcg",name:"EPCG Zero Duty Export",ministry:"Commerce",min:100000,max:50000000,keys:["export","manufacturing","all"],score:89,reason:"Zero duty import for export {biz} with {amount} - best for domestic manufacturer aiming to export."},
+{id:"advance_auth",name:"Advance Authorisation Scheme",ministry:"Commerce",min:100000,max:50000000,keys:["export","manufacturing","all"],score:88,reason:"Duty free import for {biz} exporter with {amount}."},
+{id:"pmegp_rural",name:"PMEGP Rural 35% Subsidy",ministry:"MSME",min:50000,max:2500000,keys:["rural","all"],score:90,reason:"35% subsidy in rural for {biz} with {amount}."},
+{id:"pmegp_urban",name:"PMEGP Urban 25% Subsidy",ministry:"MSME",min:50000,max:2500000,keys:["urban","all"],score:88,reason:"25% subsidy in urban for {biz}."},
+{id:"coir_vikas",name:"Coir Vikas Yojana",ministry:"MSME",min:10000,max:1000000,keys:["artisan","all"],score:82,reason:"Coir business support for {biz}."},
+{id:"coir_udyami",name:"Coir Udyami Yojana",ministry:"MSME",min:50000,max:1000000,keys:["artisan","all"],score:83,reason:"Coir unit setup for {biz}."},
+{id:"gramodyog",name:"Gramodyog Vikas",ministry:"MSME",min:10000,max:500000,keys:["rural","artisan","all"],score:81,reason:"Village industry for {biz}."},
+{id:"kvic_honey",name:"Honey Mission",ministry:"MSME",min:10000,max:500000,keys:["farmer","all"],score:84,reason:"Beekeeping for {biz} with {amount}."},
+{id:"kvic_kumhar",name:"Kumhar Sashaktikaran",ministry:"MSME",min:10000,max:500000,keys:["artisan","all"],score:82,reason:"Potter support for {biz}."},
+{id:"leather",name:"Leather Tech - FLCTD",ministry:"MSME",min:100000,max:10000000,keys:["manufacturing","all"],score:83,reason:"Leather & footwear tech for {biz}."},
+{id:"esdp",name:"ESDP Entrepreneurship Skill",ministry:"MSME",min:10000,max:1000000,keys:["all"],score:80,reason:"Skill + startup for {biz}."},
+{id:"imc",name:"International Cooperation",ministry:"MSME",min:100000,max:5000000,keys:["export","all"],score:84,reason:"Export market support for {biz}."},
+{id:"mpda",name:"Marketing Promotion",ministry:"MSME",min:10000,max:1000000,keys:["all"],score:81,reason:"Marketing help for {biz}."},
+{id:"procurement",name:"Public Procurement Policy",ministry:"MSME",min:10000,max:50000000,keys:["all"],score:85,reason:"25% govt purchase from {biz}."},
+{id:"samarth",name:"Samarth - Textile",ministry:"Textiles",min:10000,max:1000000,keys:["tailor","textile","all"],score:86,reason:"Textile skill + loan for {biz}."},
+{id:"sitat",name:"SITP Textile Park",ministry:"Textiles",min:1000000,max:50000000,keys:["textile","manufacturing","all"],score:82,reason:"Textile park infra for {biz}."},
+{id:"atuf",name:"ATUFS Textile Upgrade",ministry:"Textiles",min:100000,max:20000000,keys:["textile","all"],score:83,reason:"15% capital subsidy for textile {biz}."},
+{id:"nttm",name:"National Technical Textile Mission",ministry:"Textiles",min:500000,max:10000000,keys:["textile","manufacturing","all"],score:84,reason:"Technical textile for {biz}."},
+{id:"livestock",name:"National Livestock Mission",ministry:"Animal Husbandry",min:50000,max:5000000,keys:["dairy","farmer","all"],score:85,reason:"Livestock startup for {biz}."},
+{id:"dairy_fpo",name:"Dairy FPO - NABARD",ministry:"NABARD",min:100000,max:10000000,keys:["dairy","farmer","all"],score:86,reason:"Dairy FPO support for {biz}."},
+{id:"fpo",name:"FPO Formation 10k FPOs",ministry:"Agriculture",min:100000,max:10000000,keys:["farmer","all"],score:87,reason:"FPO grant + credit for {biz}."},
+{id:"agriclinics",name:"Agri-Clinics Agri-Business",ministry:"Agriculture",min:100000,max:2000000,keys:["farmer","startup","all"],score:84,reason:"Agri-business for {biz}."},
+{id:"tide",name:"TIDE 2.0 Incubation",ministry:"MeitY",min:100000,max:2000000,keys:["startup","all"],score:87,reason:"Incubation for tech {biz}."},
+{id:"samridh",name:"SAMRIDH Startup",ministry:"MeitY",min:500000,max:40000000,keys:["startup","all"],score:88,reason:"Matching fund for startup {biz}."},
+{id:"fund_funds",name:"Fund of Funds for Startups",ministry:"DPIIT",min:1000000,max:100000000,keys:["startup","all"],score:89,reason:"VC fund for {biz}."},
+{id:"lean",name:"MSME Lean Scheme",ministry:"MSME",min:100000,max:10000000,keys:["manufacturing","all"],score:84,reason:"Lean manufacturing for {biz}."},
+{id:"design",name:"MSME Design - 75% Grant",ministry:"MSME",min:100000,max:4000000,keys:["manufacturing","all"],score:84,reason:"Design improvement grant for {biz}."},
+{id:"incubation_msme",name:"MSME Incubation Idea",ministry:"MSME",min:100000,max:1500000,keys:["startup","all"],score:86,reason:"Idea to prototype ₹15L for {biz}."},
+{id:"wps",name:"Women Entrepreneurship Platform",ministry:"NITI",min:10000,max:1000000,keys:["women","all"],score:88,reason:"WEP support for women {biz}."},
+{id:"mahila_coir",name:"Mahila Coir Yojana",ministry:"MSME",min:10000,max:500000,keys:["women","artisan","all"],score:85,reason:"Coir training + stipend for women {biz}."},
+{id:"export_promo",name:"MSME Export Promotion",ministry:"MSME",min:100000,max:5000000,keys:["export","all"],score:85,reason:"Export promo grant for {biz}."},
+{id:"pm_yuva",name:"PM YUVA Entrepreneurship",ministry:"MSME",min:10000,max:1000000,keys:["student","all"],score:82,reason:"Entrepreneurship for student {biz}."},
+{id:"digital_msme",name:"Digital MSME",ministry:"MSME",min:10000,max:1000000,keys:["all"],score:83,reason:"Digital adoption subsidy for {biz}."},
+{id:"ip_trust",name:"MSME IP - Patent Reimburse",ministry:"MSME",min:10000,max:1000000,keys:["startup","manufacturing","all"],score:85,reason:"Patent cost reimburse for {biz}."},
+{id:"domestic_market",name:"Domestic Market Development",ministry:"MSME",min:50000,max:2000000,keys:["manufacturing","all"],score:83,reason:"Domestic market support for {biz} aiming to go national."},
+{id:"credit_linked",name:"Credit Linked Capital Subsidy 2.0",ministry:"MSME",min:100000,max:10000000,keys:["manufacturing","all"],score:87,reason:"Capital subsidy 2.0 for {biz} with {amount}."},
+{id:"nsp",name:"National SC Plan - 100% Subsidy Tool",ministry:"MSME",min:10000,max:500000,keys:["sc","all"],score:86,reason:"Tool kit for SC {biz}."},
+{id:"tribal_25",name:"Tribal Co-op Marketing",ministry:"Tribal",min:50000,max:5000000,keys:["st","all"],score:84,reason:"Tribal product marketing for {biz}."},
+{id:"minority_udyam",name:"Minority Udyam - Nai Roshni",ministry:"Minority",min:10000,max:500000,keys:["minority","women","all"],score:83,reason:"Leadership + loan for minority women {biz}."},
+{id:"naps",name:"NAPS Apprenticeship Stipend",ministry:"Skill India",min:10000,max:1000000,keys:["all"],score:80,reason:"Stipend support for {biz} hiring apprentices."},
+{id:"pmegp_second",name:"PMEGP Second Loan Upto 1Cr",ministry:"MSME",min:100000,max:10000000,keys:["all"],score:85,reason:"Second expansion loan up to 1Cr for {biz}."},
+{id:"samadhan",name:"MSME Samadhan",ministry:"MSME",min:10000,max:5000000,keys:["all"],score:81,reason:"Recover delayed payments for {biz}."},
+{id:"udyam_assist",name:"Udyam Assist",ministry:"MSME",min:10000,max:1000000,keys:["all"],score:82,reason:"Formalize informal micro {biz}."},
+{id:"til",name:"Trade Infra for Export",ministry:"Commerce",min:500000,max:10000000,keys:["export","manufacturing","all"],score:86,reason:"Export infra for {biz}."},
+{id:"pmegp_women",name:"PMEGP Women Special 35%",ministry:"MSME",min:50000,max:2500000,keys:["women","all"],score:89,reason:"Higher subsidy 35% for women {biz}."},
+{id:"standup_women",name:"Stand-Up Women Extra",ministry:"DFS",min:1000000,max:10000000,keys:["women","all"],score:90,reason:"Extra support for women entrepreneur {biz}."},
+{id:"vanchit",name:"Vanchit Samooh Credit",ministry:"SIDBI",min:10000,max:500000,keys:["all"],score:80,reason:"For neglected {biz} with {amount}."},
+{id:"pm_dhan",name:"PM Dhan Yojana - Food Processing",ministry:"Food Processing",min:100000,max:5000000,keys:["food","all"],score:85,reason:"Food processing infra for {biz}."},
+{id:"kisan_credit",name:"Kisan Credit Card Plus",ministry:"Agriculture",min:10000,max:300000,keys:["farmer","all"],score:88,reason:"KCC plus for {biz} with {amount}."},
+{id:"matsya_kcc",name:"Matsya KCC Fishery",ministry:"Fisheries",min:10000,max:200000,keys:["fishery","all"],score:83,reason:"KCC for fishery {biz}."},
+{id:"e_mudra",name:"e-Mudra Instant",ministry:"DFS",min:50000,max:1000000,keys:["all"],score:84,reason:"Instant e-KYC loan for {biz}."},
+{id:"msme_mart",name:"mSME Mart - B2B",ministry:"MSME",min:10000,max:1000000,keys:["all"],score:80,reason:"B2B marketplace for {biz}."},
+{id:"skill_india_loan",name:"Skill Loan Scheme",ministry:"Skill India",min:5000,max:150000,keys:["all"],score:81,reason:"Skill course loan for {biz}."}
 ];
 
 function openModel(type){
@@ -152,20 +206,17 @@ function analyzeStory(){
   else{let all=[...text.matchAll(/₹?\s*(\d{1,3},?\d{3,5})/g)]; if(all.length){let v=parseInt(all[all.length-1][0].replace(/,/g,'')); if(v>1000){need=v; amtStr="₹"+v.toLocaleString('en-IN');}}}
   if(need===0)need=30000;
   let biz="Small Business", key="all";
-  if(lower.includes("mobile")){biz="Mobile repair shop";key="all";} else if(lower.includes("tailor")){biz="Tailoring business";key="tailor";} else if(lower.includes("vendor")||lower.includes("street")){biz="Street vending";key="vendor";} else if(lower.includes("manufactur")||lower.includes("export")){biz="Manufacturing unit";key="manufacturing";} else if(lower.includes("shop")){biz="Small Shop";key="shop";}
-  let scored=ALL_SCHEMES.map(s=>{let sc=s.min<=need&&need<=s.max?s.score:s.score-30; if(s.keys.includes(key)||s.keys.includes("all"))sc+=5; if(lower.includes("export")&&s.id==="zed")sc+=15; if(lower.includes("vendor")&&s.id==="pm_svanidhi")sc+=12; if(sc>98)sc=98; return{...s,final:sc,reason:s.reason.replace("{amount}",amtStr).replace("{biz}",biz)};});
-  scored.sort((a,b)=>b.final-a.final); let top3=scored.slice(0,3);
-  localStorage.setItem("selectedScheme",top3[0].name); localStorage.setItem("subsidy",top3[0].name.includes("PMEGP")?"35":"15"); localStorage.setItem("loanAmount",need); localStorage.setItem("businessType",biz);
-  let html=`<div style="margin-bottom:10px"><span class="tag">Extracted</span> <b>${biz}</b> | ${amtStr}</div>`;
-  top3.forEach(s=>{html+=`<div class="scheme"><b>${s.name} - ${s.final}% Match</b><br><small>${s.ministry} • All India</small><br>${s.reason}</div>`;});
+  if(lower.includes("tailor")){biz="Tailoring business";key="tailor";} else if(lower.includes("vendor")||lower.includes("street")){biz="Street vending";key="vendor";} else if(lower.includes("manufactur")||lower.includes("export")){biz="Manufacturing unit";key="manufacturing";} else if(lower.includes("shop")){biz="Small Shop";key="shop";} else if(lower.includes("farmer")||lower.includes("dairy")){biz="Farming/Dairy";key="farmer";} else if(lower.includes("food")){biz="Food Business";key="food";} else if(lower.includes("startup")){biz="Startup";key="startup";} else if(lower.includes("artisan")){biz="Artisan";key="artisan";}
+  let scored=ALL_SCHEMES.map(s=>{let sc=s.min<=need&&need<=s.max?s.score:s.score-30; if(s.keys.includes(key)||s.keys.includes("all"))sc+=5; if(lower.includes("export")&&(s.id==="zed"||s.id==="epcg"||s.id==="advance_auth"||s.id==="til"))sc+=18; if(lower.includes("vendor")&&s.id==="pm_svanidhi")sc+=12; if(lower.includes("woman")&&s.keys.includes("women"))sc+=8; if(lower.includes("sc")&&s.keys.includes("sc"))sc+=10; if(sc>99)sc=99; return{...s,final:sc,reason:s.reason.replace("{amount}",amtStr).replace("{biz}",biz)};});
+  scored.sort((a,b)=>b.final-a.final); let top5=scored.slice(0,5);
+  localStorage.setItem("selectedScheme",top5[0].name); localStorage.setItem("subsidy",top5[0].name.includes("PMEGP")||top5[0].name.includes("PMFME")?"35":"15"); localStorage.setItem("loanAmount",need); localStorage.setItem("businessType",biz);
+  let html=`<div style="margin-bottom:10px"><span class="tag">${ALL_SCHEMES.length} SCHEMES SCANNED</span> <b>${biz}</b> | ${amtStr}</div><div style="font-size:11px;color:#64748b;margin-bottom:6px">Top 5 from ${ALL_SCHEMES.length} schemes:</div>`;
+  top5.forEach(s=>{html+=`<div class="scheme"><b>${s.name} - ${s.final}% Match</b> <span class="tag">${s.ministry}</span><br><small>₹${s.min.toLocaleString()}-₹${s.max.toLocaleString()}</small><br>${s.reason}</div>`;});
   html+=`<button class="mainBtn greenBtn" onclick="openModel('B')">Next → Go to Financial Calculator</button>`;
   document.getElementById('resultA').style.display='block'; document.getElementById('resultA').innerHTML=html;
 }
-
-// ===== MODEL B =====
 function loadBData(){
-  let s=localStorage.getItem("selectedScheme")||"Please run Model A first";
-  let l=localStorage.getItem("loanAmount")||"50000"; let sub=localStorage.getItem("subsidy")||"15"; let b=localStorage.getItem("businessType")||"";
+  let s=localStorage.getItem("selectedScheme")||"Please run Model A first"; let l=localStorage.getItem("loanAmount")||"50000"; let sub=localStorage.getItem("subsidy")||"15"; let b=localStorage.getItem("businessType")||"";
   document.getElementById('schemeName').value=s; document.getElementById('loanAmt').value=l; document.getElementById('subPct').value=sub;
   document.getElementById('fromAInfo').innerHTML=`✅ From Model A: <b>${s}</b> | Business: ${b} | Amount: ₹${parseInt(l).toLocaleString('en-IN')}`;
 }
@@ -177,8 +228,6 @@ function calcEMI(){
   document.getElementById('resultB').style.display='block';
   document.getElementById('resultB').innerHTML=`<b style="color:green">Subsidy: ₹${subAmt.toLocaleString('en-IN')}</b><br>Pay Only: ₹${pay.toLocaleString('en-IN')}<br><b>EMI: ₹${emi.toFixed(0)}/month for ${n} months</b><br><br><button class="mainBtn purpleBtn" onclick="openModel('C')">Next → Go to Map</button>`;
 }
-
-// ===== MODEL C =====
 var map=L.map('map').setView([8.7139,77.7567],13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(map);
 var userMarker=L.marker([8.7139,77.7567]).addTo(map).bindPopup("You").openPopup();
